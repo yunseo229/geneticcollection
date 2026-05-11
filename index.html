@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>GENETIC COLLECTION 57</title>
+  <link href="https://cdn.jsdelivr.net/gh/spoqa/spoqa-han-sans@latest/css/SpoqaHanSansNeo.css" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@200;400;700;800&display=swap" rel="stylesheet">
+  <script src="https://cdn.jsdelivr.net/npm/@mediapipe/holistic/holistic.js" crossorigin="anonymous"></script>
+  <script src="https://cdn.jsdelivr.net/npm/@mediapipe/drawing_utils/drawing_utils.js" crossorigin="anonymous"></script>
+  <script src="https://cdn.jsdelivr.net/npm/@mediapipe/camera_utils/camera_utils.js" crossorigin="anonymous"></script>
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+<canvas id="connect-canvas"></canvas>
+
+<section class="screen" id="s-main">
+
+  <aside class="left-panel">
+    <div class="filter-area">
+      <div class="filter-tags" id="filterTags"></div>
+    </div>
+    <div class="trait-list-container">
+      <div class="trait-list-header">
+        <span>TRAIT</span>
+        <span>RS CODE</span>
+      </div>
+      <div class="trait-list" id="tList"></div>
+    </div>
+  </aside>
+
+  <main class="right-panel">
+
+    <div class="body-map-wrap">
+      <div id="center-text-box"></div>
+    </div>
+
+    <div class="cam-widget" id="camWidget">
+      <video id="vid" autoplay muted playsinline></video>
+      <canvas id="plei-canvas"></canvas>
+      <canvas id="overlay"></canvas>
+      <div class="cam-overlay" id="camOverlay">
+        <div class="cam-overlay-text">
+          <span class="cam-overlay-eye">SCANNING</span>
+          <span class="cam-overlay-sub">카메라에 얼굴을 비춰주세요<br>유전형질이 분석됩니다</span>
+        </div>
+      </div>
+      <div id="face-status">INITIALIZING...</div>
+    </div>
+
+    <button class="save-btn" onclick="saveSnapshot()">SAVE MAP ↓</button>
+  </main>
+
+</section>
+
+<script src="script.js"></script>
+</body>
+</html>

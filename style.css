@@ -1,0 +1,417 @@
+:root {
+  --bg: #ffffff;
+  --text-main: #000000;
+  --text-dim: #999999;
+  --line: #e0e0e0;
+  --accent: #00FF66;
+}
+
+* { box-sizing: border-box; margin: 0; padding: 0; }
+
+body {
+  background: var(--bg);
+  color: var(--text-main);
+  font-family: 'Spoqa Han Sans Neo', sans-serif;
+  font-weight: 400;
+  overflow: hidden;
+  height: 100vh;
+}
+
+#connect-canvas {
+  position: fixed; top: 0; left: 0;
+  width: 100vw; height: 100vh;
+  pointer-events: none; z-index: 100;
+}
+
+.screen {
+  position: fixed; inset: 0;
+  display: flex;
+  background: var(--bg);
+  z-index: 10;
+}
+
+/* ── MAIN LAYOUT ── */
+#s-main { display: flex; flex-direction: row; width: 100%; }
+
+/* ── 1열: LEFT PANEL (리스트) ── */
+.left-panel {
+  width: 25vw; 
+  border-right: 1px solid #000; /* 1px은 유지 */
+  display: flex; flex-direction: column;
+  height: 100vh;
+  background: var(--bg);
+  z-index: 50; flex-shrink: 0;
+}
+
+.filter-area {
+  width: 100%;
+  height: 1.25rem; 
+  border-bottom: 1px solid #000;
+  flex-shrink: 0;
+}
+.filter-tags { 
+  display: flex; 
+  width: 100%;
+  height: 100%;
+}
+.f-tag {
+  flex: 1; 
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-family: 'Spoqa Han Sans Neo', sans-serif; 
+  font-weight: 00;
+  font-size: 0.6875rem;
+  letter-spacing: -0.05em;
+  padding: 0;
+  border: none;
+  background-color: var(--cat-color);
+  color: #000; 
+  cursor: pointer;
+  transition: all 0.15s ease;
+  opacity: 1;
+}
+.f-tag:last-child { border-right: none; }
+.f-tag:hover { opacity: 0.75; }
+.f-tag.active { opacity: 1; font-weight: 700; }
+
+.trait-list-container { flex: 1; display: flex; flex-direction: column; overflow: hidden; }
+.trait-list-header {
+  display: flex; justify-content: space-between;
+  padding: 0.5625rem 1.375rem; /* 9px 22px */
+  font-family: 'JetBrains Mono', monospace; font-weight: 800;
+  font-size: 0.9375rem; /* 15px */
+  color: var(--text-dim);
+  border-bottom: 1px solid #000;
+  text-transform: uppercase; flex-shrink: 0;
+}
+.trait-list { flex: 1; overflow-y: auto; }
+.trait-list::-webkit-scrollbar { width: 0.125rem; } /* 2px */
+.trait-list::-webkit-scrollbar-thumb { background: #ffffff; }
+
+.ti {
+  display: flex; justify-content: space-between; align-items: center;
+  padding: 0.6875rem 1.375rem; /* 11px 22px */
+  border-bottom: 1px solid #000;
+  cursor: pointer;
+  transition: all 0.15s ease;
+  background-color: transparent;
+  border-left: 0.3125rem solid var(--cat-color); /* 5px */
+}
+.ti:hover {
+  background-color: var(--cat-bg-hover, #ffffff);
+  border-left: 0.25rem solid var(--cat-color, transparent); /* 4px */
+}
+.ti.active {
+  background-color: var(--cat-color, #000);
+  border-left: 0.25rem solid #000; /* 4px */
+}
+.ti.active .ti-name { color: #000; font-weight: 800; }
+.ti.active .ti-gene { color: #000; }
+.ti.hidden-item { display: none; }
+.ti.plei-related {
+  border-left-width: 0.25rem; /* 4px */
+  border-left-style: solid;
+  transition: background-color 0.2s ease, border-left-color 0.2s ease;
+  opacity: 1 !important; 
+}
+
+.ti-name {
+  font-size: 1rem; /* 20px */
+  color: #000;
+  font-family: 'Spoqa Han Sans Neo', sans-serif;
+  font-weight: 800; transition: color 0.15s;
+}
+.ti-gene {
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 1rem; /* 20px */
+  font-weight: 800; 
+  color: #000;      
+  text-align: right;
+  transition: color 0.15s;
+}
+
+/* ── RIGHT PANEL ── */
+.right-panel {
+  flex: 1; position: relative; background: var(--bg);
+  overflow: hidden;
+}
+
+/* ── 2열: 중앙 텍스트 ── */
+.body-map-wrap {
+  width: 100%;
+  height: 100vh;
+  z-index: 5;
+  padding: 2rem 33.75rem 2rem 2rem; /* 32px 540px 32px 32px */
+  overflow: hidden;
+}
+
+#center-text-box {
+  width: 100%; height: 100%;
+  overflow-y: auto;
+  font-family: 'Spoqa Han Sans Neo', sans-serif;
+  font-size: 1.25rem; 
+  font-weight: 700;
+  line-height: 1.8; word-break: keep-all;
+  padding-bottom: 50vh;
+  width: 45vw; 
+}
+
+.c-line {
+  display: inline;
+  transition: all 0.25s ease;
+  color: #000; cursor: pointer;
+  background-color: transparent;
+  box-decoration-break: clone;
+  -webkit-box-decoration-break: clone;
+  border-radius: 0.125rem; /* 2px */
+  padding: 0.0625rem 0; /* 1px 0 */
+}
+.c-line:hover { background-color: var(--cat-bg-hover, #eee); }
+.c-line.plei-related {
+  transition: background-color 0.2s ease;
+  border-radius: 0.125rem; /* 2px */
+  box-decoration-break: clone;
+  -webkit-box-decoration-break: clone;
+}
+#center-text-box.has-active .c-line { color: #000000b2; background-color: transparent; }
+
+/* 중앙 텍스트 하이라이트 및 흰색 반전 처리 */
+#center-text-box.has-active .c-line.active {
+  color: #ffffff; /* 👈 이 부분을 #000에서 #ffffff로 변경! */
+  font-weight: 700;
+  background-color: var(--cat-color);
+  box-shadow: 0.25rem 0 0 var(--cat-color), -0.25rem 0 0 var(--cat-color); 
+}
+
+#center-text-box.has-active .c-line.plei-related {
+  color: #ffffff; /* 👈 연관된 항목(plei-related)도 같이 반전시키려면 여기도 흰색으로! */
+  font-weight: 700;
+}
+
+/* ── 3열: 웹캠 (가로형, 크게) ── */
+.cam-widget {
+  position: absolute;
+  top: 1rem; /* 16px */
+  right: 1.25rem; /* 20px */
+  width: 25vw;
+  height: 30vh;
+  background: #000;
+  overflow: hidden;
+  z-index: 40;
+  border: 1px solid #000; 
+  transition: all 0.4s cubic-bezier(0.16,1,0.3,1);
+  cursor: pointer;
+}
+.cam-widget.expanded {
+  top: 0; right: 0;
+  width: 100%; height: 100%;
+  border: none; z-index: 100;
+}
+
+/* ── 웹캠 상단 색상 바 ── */
+.cam-color-bar {
+  position: absolute;
+  top: 0; left: 0;
+  width: 100%; height: 1.875rem; /* 30px */
+  display: flex;
+  flex-direction: row;
+  z-index: 10;
+  border-bottom: 1px solid #000;
+}
+.ccb-item {
+  flex: 1; height: 100%;
+  background-color: var(--cat-color);
+  border-right: 1px solid #000;
+  display: flex; align-items: center; justify-content: center;
+  overflow: hidden; position: relative; transition: all 0.15s ease;
+}
+.ccb-item:last-child { border-right: none; }
+.ccb-item.active { border: 0.125rem solid #000; /* 2px */ z-index: 2; }
+.ccb-text {
+  font-size: 0.53125rem; /* 8.5px */
+  color: #000;
+  font-family: 'Spoqa Han Sans Neo', sans-serif; font-weight: 700;
+  writing-mode: vertical-rl; text-orientation: mixed;
+  white-space: nowrap; letter-spacing: -0.05em; opacity: 0.8;
+}
+.ccb-item.active .ccb-text { opacity: 1; }
+
+#vid {
+  position: absolute; inset: 0;
+  width: 100%; height: 100%;
+  object-fit: cover; transform: scaleX(-1);
+  opacity: 0.85; pointer-events: none;
+}
+#plei-canvas, #overlay {
+  position: absolute; inset: 0;
+  width: 100%; height: 100%;
+  pointer-events: none;
+}
+#plei-canvas { z-index: 5; }
+#overlay     { z-index: 10; }
+
+.cam-overlay {
+  position: absolute; inset: 0;
+  display: flex; align-items: center; justify-content: center;
+  background: rgba(0,0,0,0.65); z-index: 15;
+  transition: opacity 0.8s ease;
+}
+.cam-overlay.hidden { opacity: 0; pointer-events: none; }
+.cam-overlay-text { text-align: center; }
+.cam-overlay-eye {
+  display: block; font-family: 'JetBrains Mono', monospace; font-weight: 200;
+  font-size: 0.6875rem; /* 11px */
+  letter-spacing: 0.4em; color: var(--accent); margin-bottom: 1rem; /* 16px */
+  animation: blink 1.4s ease-in-out infinite;
+}
+.cam-overlay-sub {
+  display: block; font-family: 'JetBrains Mono', monospace; font-weight: 200;
+  font-size: 0.5625rem; /* 9px */
+  letter-spacing: 0.15em; color: rgb(255, 255, 255); line-height: 2;
+}
+@keyframes blink { 0%, 100% { opacity: 1; } 50% { opacity: 0.2; } }
+
+#face-status {
+  position: absolute; top: 1rem; left: 1rem; /* 16px */
+  font-family: 'JetBrains Mono', monospace; font-weight: 200;
+  font-size: 0.5625rem; /* 9px */
+  letter-spacing: 0.1em;
+  background: rgba(255,255,255,0.85); color: #000;
+  padding: 0.25rem 0.625rem; /* 4px 10px */
+  border: 1px solid #000; z-index: 20;
+}
+
+/* ── SAVE BTN ── */
+.save-btn {
+  position: absolute; bottom: 1.25rem; right: 1.25rem; /* 20px */
+  background: #000; color: #fff; border: none;
+  font-family: 'JetBrains Mono', monospace; font-weight: 700;
+  font-size: 0.5625rem; /* 9px */
+  letter-spacing: 0.15em;
+  padding: 0.5rem 1rem; /* 8px 16px */
+  cursor: pointer; z-index: 50; transition: 0.2s;
+}
+.save-btn:hover { background: var(--accent); color: #000; }
+
+/* ==============================================================
+   모바일 & 태블릿 반응형 처리 (64rem = 1024px)
+   웹캠 -> 리스트 -> 텍스트 순으로 배치
+============================================================== */
+@media (max-width: 64rem) { /* 1024px */
+  #s-main {
+    flex-direction: column;
+  }
+  .right-panel {
+    /* 래퍼를 해제하여 내부 웹캠과 텍스트를 flex 순서 제어에 편입시킵니다 */
+    display: contents; 
+  }
+  .cam-widget {
+    position: relative;
+    top: 0; right: 0;
+    width: 100%;
+    height: 35vh; /* 웹캠 영역 높이 */
+    border: none;
+    border-bottom: 1px solid #000;
+    order: 1; /* 제일 위 */
+  }
+  .cam-widget.expanded {
+    position: fixed;
+    z-index: 999;
+  }
+  .left-panel {
+    width: 100%;
+    min-width: 100%;
+    height: 35vh; 
+    border-right: none;
+    border-bottom: 1px solid #000;
+    order: 2; 
+  }
+  .body-map-wrap {
+    width: 100%;
+    height: 30vh; /* 텍스트 영역 높이 */
+    padding: 1.5rem; /* 24px */
+    order: 3; /* 제일 아래 */
+  }
+  #center-text-box {
+    max-width: 100%;
+    padding-bottom: 15vh; /* 스크롤 여유 공간 */
+    font-size: 1rem; /* 16px: 모바일에선 글씨 크기 살짝 줄임 */
+  }
+  .ti-name, .ti-gene {
+    font-size: 1rem; /* 16px */
+  }
+  .save-btn {
+    position: fixed;
+    bottom: 1rem; /* 16px */
+    right: 1rem; /* 16px */
+    z-index: 100; /* 모바일에선 화면에 고정 */
+  }
+}
+/* ==============================================================
+   미니맵 (오른쪽 하단 Body Map) - 확장 기능 추가
+============================================================== */
+#minimap-wrap {
+  position: fixed;
+  bottom: 3.5rem;
+  right: 1.25rem;
+  width: 18rem;
+  height: 30rem;
+  background-color: #000000;
+  border: 1px solid #333333;
+  z-index: 101;
+  opacity: 0;
+  pointer-events: none;
+  /* 부드러운 애니메이션과 마우스 클릭 커서 추가 */
+  transition: all 0.4s cubic-bezier(0.16,1,0.3,1);
+  cursor: pointer; 
+  transform: translate(0, 0);
+}
+
+/* 웹캠이 켜질 때 나타남 */
+#minimap-wrap.visible {
+  opacity: 1;
+  pointer-events: auto;
+}
+
+/* 👇 미니맵을 클릭해서 확장했을 때 (화면 중앙으로 커짐) */
+#minimap-wrap.expanded {
+  bottom: 50vh;
+  right: 50vw;
+  transform: translate(50%, 50%); /* 화면 정중앙으로 이동 */
+  height: 85vh; /* 화면 높이의 85%까지 꽉 차게 */
+  width: calc(85vh * (9 / 19)); /* 점 위치가 어긋나지 않게 기존 9:19 비율 강제 유지! */
+  z-index: 9999;
+  border: 1px solid #555555;
+  box-shadow: 0 0 40px rgba(0,0,0,0.8); /* 살짝 그림자를 줘서 입체감 추가 */
+}
+
+/* people.svg 도트 실루엣 */
+.minimap-bg {
+  position: absolute;
+  top: 1rem; left: 1rem; right: 1rem; bottom: 1rem;
+  background-image: radial-gradient(var(--text-dim) 1px, transparent 1px);
+  background-size: 0.2rem 0.2rem; 
+  -webkit-mask-image: url('people.svg');
+  -webkit-mask-size: contain;
+  -webkit-mask-position: center;
+  -webkit-mask-repeat: no-repeat;
+  mask-image: url('people.svg');
+  mask-size: contain;
+  mask-position: center;
+  mask-repeat: no-repeat;
+  opacity: 0.6; 
+}
+
+#minimap-canvas {
+  position: absolute;
+  top: 1rem; left: 1rem;
+  width: calc(100% - 2rem);
+  height: calc(100% - 2rem);
+}
+/* ── 기존 SAVE BTN 덮어쓰기 (실루엣 바로 아래에 위치) ── */
+.save-btn {
+  bottom: 1.25rem !important; /* 다시 화면 맨 아래로 내림 */
+  right: 1.25rem !important;  /* 미니맵과 우측 정렬을 똑같이 맞춤 */
+  z-index: 100;
+}

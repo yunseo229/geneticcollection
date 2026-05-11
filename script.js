@@ -828,10 +828,9 @@ function saveSnapshot() {
 // ══════════════════════════════════════════════
 // INIT
 // ══════════════════════════════════════════════
-// ══════════════════════════════════════════════
-// INIT
-// ══════════════════════════════════════════════
 async function initSystem() {
+  
+  // 1. 미니맵 랩퍼 생성
   if (!document.getElementById('minimap-wrap')) {
     const mmWrap = document.createElement('div');
     mmWrap.id = 'minimap-wrap';
@@ -841,11 +840,18 @@ async function initSystem() {
     `;
     document.body.appendChild(mmWrap);
 
-    // 👇 미니맵 클릭 시 커지는 이벤트 리스너 추가!
     mmWrap.addEventListener('click', () => {
       mmWrap.classList.toggle('expanded');
-      setTimeout(resizeCanvases, 450); // 크기가 다 커진 후 내부 점(캔버스) 다시 그리기
+      setTimeout(resizeCanvases, 450); 
     });
+  }
+
+  // 2. 우측 하단 ppl.png 생성 (확실하게 추가!)
+  if (!document.getElementById('ppl-png')) {
+    const pplImg = document.createElement('img');
+    pplImg.id = 'ppl-png';
+    pplImg.src = 'ppl.png'; // 👈 파일명 ppl.png로 수정!
+    document.body.appendChild(pplImg);
   }
 
   if (!listBuilt) {

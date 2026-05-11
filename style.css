@@ -409,9 +409,24 @@ body {
   width: calc(100% - 2rem);
   height: calc(100% - 2rem);
 }
-/* ── 기존 SAVE BTN 덮어쓰기 (실루엣 바로 아래에 위치) ── */
+
+/* ==============================================================
+   우측 하단 ppl.png 이미지 (세이브 버튼 바로 위)
+============================================================== */
+#ppl-png {
+  position: fixed;
+  bottom: 5rem;      
+  right: 3rem;    
+  width: 15rem;   
+transform: rotate(-10deg);
+  height: auto;
+  z-index: 90;      
+  pointer-events: none; 
+  opacity: 0.9;
+}
+
 .save-btn {
-  bottom: 1.25rem !important; /* 다시 화면 맨 아래로 내림 */
-  right: 1.25rem !important;  /* 미니맵과 우측 정렬을 똑같이 맞춤 */
+  bottom: 1.25rem !important; 
+  right: 1.25rem !important; 
   z-index: 100;
 }

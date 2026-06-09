@@ -1,10 +1,9 @@
-
 // ══════════════════════════════════════════════
-// DATA (수동 맵핑 좌표 완벽 통합 + 에러 수정 완료)
+// DATA (따옴표 에러 완벽 수정본!)
 // ══════════════════════════════════════════════
 const TRAITS = [
   {id:'t1', cats:['대사'], name:'카페인 분해속도', nameEn:'Caffeine Metabolism Rate', gene:'CYP1A2 rs762551', lm:'LIVER', lm2:'BRAIN_C', assoc:5, vis:'조건부', bodyPos:{x:0.420, y:0.420}, plei:['t34']},
-  {id:'t11', cats:['감각'], name:'매운맛 선호도', nameEn:'Spicy Food Preference', gene:'TRPV1 rs8065080', lm:'MOUTH_R', lm2:'STOMACH', assoc:3.5, vis:'조건부', bodyPos:{x:0.440, y:0.170}, plei:[]},
+  {id:'t11', cats:['감각'], name:'매운맛 선호도', nameEn:'Spicy Food Preference', gene:'TRPV1 rs8065080', lm:'MOUTH_R', lm2:'STOMACH', assoc:3.5, vis:'조건부', bodyPos:{x:0.486, y:0.221}, plei:[]},
   {id:'t21', cats:['감각','신체'], name:'암내', nameEn:'Body Odor', gene:'ABCC11 rs1782293', lm:'ARM_L', lm2:'CHEEK_C', assoc:5, vis:'조건부', bodyPos:{x:0.381, y:0.247}, plei:['t5']},
   {id:'t31', cats:['운동'], name:'근육발달', nameEn:'Muscle Development', gene:'ACTN3 rs1815739', lm:'ARM_R', lm2:'LOWER_L', assoc:4.5, vis:'조건부', bodyPos:{x:0.317, y:0.411}, plei:[]},
   {id:'t41', cats:['행동','사회'], name:'정치성향', nameEn:'Political Orientation', gene:'DRD4 rs1800955', lm:'FOREHEAD_R', lm2:'BRAIN_CR', assoc:1, vis:'내적', bodyPos:{x:0.459, y:0.108}, plei:['t38','t45']},
@@ -56,7 +55,7 @@ const TRAITS = [
   {id:'t27', cats:['대사','감각'], name:'내장 선호', nameEn:'Offal (Organ Meat) Preference', gene:'위장관 회로', lm:'STOMACH', lm2:'BRAIN_CR', assoc:3.5, vis:'조건부', bodyPos:{x:0.550, y:0.440}, plei:[]},
   {id:'t37', cats:['행동'], name:'폭력성', nameEn:'Aggressiveness / Violence', gene:'MAOA rs909525', lm:'BRAIN_L', lm2:'FOREHEAD', assoc:3, vis:'내적', bodyPos:{x:0.502, y:0.127}, plei:[]},
   {id:'t47', cats:['신체'], name:'뼈 관련 형질', nameEn:'Bone-related Traits', gene:'골세포', lm:'ARM_L', lm2:'LOWER_R', assoc:4, vis:'조건부', bodyPos:{x:0.500, y:0.400}, plei:[]},
-  {id:'t57', cats:['노화','인지'], name:'알츠하이머 위험도', nameEn:'Alzheimer's Risk', gene:'APOE e4 variant', lm:'TOP', lm2:'CHEST_C', assoc:5, vis:'내적', bodyPos:{x:0.500, y:0.100}, plei:[]},
+  {id:'t57', cats:['노화','인지'], name:'알츠하이머 위험도', nameEn:"Alzheimer's Risk", gene:'APOE e4 variant', lm:'TOP', lm2:'CHEST_C', assoc:5, vis:'내적', bodyPos:{x:0.500, y:0.100}, plei:[]},
   {id:'t67', cats:['신체'], name:'발 크기/발 모양', nameEn:'Foot Size / Foot Shape', gene:'다인자 유전', lm:'LOWER_L', lm2:'LOWER_R', assoc:3.5, vis:'외적', bodyPos:{x:0.412, y:0.925}, plei:[]},
   {id:'t77', cats:['신체'], name:'하지 관절 가동성', nameEn:'Lower Limb Joint Mobility', gene:'COL계열 결합조직 복합', lm:'LOWER_L', lm2:'LOWER_R', assoc:3.5, vis:'조건부', bodyPos:{x:0.598, y:0.895}, plei:[]},
   {id:'t8', cats:['인지'], name:'희망/기대 성향', nameEn:'Hope / Expectation Tendency', gene:'해마/변연계', lm:'BRAIN_T', lm2:'BRAIN_CL', assoc:3, vis:'내적', bodyPos:{x:0.501, y:0.172}, plei:[]},
@@ -79,8 +78,8 @@ const TRAITS = [
   {id:'t40', cats:['인지'], name:'지능(IQ)', nameEn:'Intelligence (IQ)', gene:'SHANK3 NR2B', lm:'TOP', lm2:'BRAIN_C', assoc:3.5, vis:'내적', bodyPos:{x:0.517, y:0.116}, plei:[]},
   {id:'t50', cats:['대사','행동'], name:'잦은 식사 횟수', nameEn:'Frequent Eating', gene:'인슐린 축', lm:'BRAIN_B', lm2:'STOMACH_R', assoc:3.5, vis:'내적', bodyPos:{x:0.550, y:0.440}, plei:[]},
   {id:'t60', cats:['신체'], name:'근감소 경향', nameEn:'Muscle Loss (Sarcopenia) Tendency', gene:'ADAM8 BECN1 KLF4', lm:'LOWER_C', lm2:'ARM_L', assoc:4.5, vis:'조건부', bodyPos:{x:0.454, y:0.720}, plei:['t61']},
-  {id:'t70', cats:['신체'], name:'발바닥 압력/보행 패턴', nameEn:'Plantar Pressure / Gait Pattern', gene:'복합유전', lm:'LOWER_C', lm2:'LOWER_L', assoc:3, vis:'조건부', bodyPos:{x:0.431, y:0.805}, plei:[]},
-]
+  {id:'t70', cats:['신체'], name:'발바닥 압력/보행 패턴', nameEn:'Plantar Pressure / Gait Pattern', gene:'복합유전', lm:'LOWER_C', lm2:'LOWER_L', assoc:3, vis:'조건부', bodyPos:{x:0.431, y:0.805}, plei:[]}
+];
 const CATEGORY_INFO = [
   {name:'신체', nameEn:'BODY', color:'#9500D3'},       
   {name:'감각', nameEn:'SENSE', color:'#FE1793'},     

@@ -1,7 +1,6 @@
 // ══════════════════════════════════════════════
-// DATA (따옴표 에러 완벽 수정본!)
+// DATA
 // ══════════════════════════════════════════════
-
 const TRAITS = [
   {id:'t1', cats:['대사'], name:'카페인 분해속도', nameEn:'Caffeine Metabolism Rate', gene:'CYP1A2 rs762551', lm:'LIVER', lm2:'BRAIN_C', assoc:5, vis:'조건부', bodyPos:{x:0.420, y:0.420}, plei:['t34']},
   {id:'t11', cats:['감각'], name:'매운맛 선호도', nameEn:'Spicy Food Preference', gene:'TRPV1 rs8065080', lm:'MOUTH_R', lm2:'STOMACH', assoc:3.5, vis:'조건부', bodyPos:{x:0.486, y:0.221}, plei:[]},
@@ -81,6 +80,7 @@ const TRAITS = [
   {id:'t60', cats:['신체'], name:'근감소 경향', nameEn:'Muscle Loss (Sarcopenia) Tendency', gene:'ADAM8 BECN1 KLF4', lm:'LOWER_C', lm2:'ARM_L', assoc:4.5, vis:'조건부', bodyPos:{x:0.454, y:0.720}, plei:['t61']},
   {id:'t70', cats:['신체'], name:'발바닥 압력/보행 패턴', nameEn:'Plantar Pressure / Gait Pattern', gene:'복합유전', lm:'LOWER_C', lm2:'LOWER_L', assoc:3, vis:'조건부', bodyPos:{x:0.431, y:0.805}, plei:[]}
 ];
+
 const CATEGORY_INFO = [
   {name:'신체', nameEn:'BODY', color:'#9500D3'},       
   {name:'감각', nameEn:'SENSE', color:'#FE1793'},     
@@ -112,7 +112,7 @@ const CENTER_LINES = [
   {id:'t11', text:'매운맛 선호도 — TRPV1 (rs8065080). 구강 통증 수용체 민감도. 같은 캡사이신, 다른 통증.', textEn:'Spicy Food Preference — TRPV1 (rs8065080). Oral pain receptor sensitivity. Same capsaicin, different pain levels.'},
   {id:'t12', text:'모발 생성 — EDAR (rs3827760). 모낭과 외배엽 피부 발달. 머리카락 굵기와 공유 유전자.', textEn:'Hair Growth / Formation — EDAR (rs3827760). Hair follicle and ectodermal skin development. Shared gene with hair thickness.'},
   {id:'t13', text:'먹는 양 — FTO (rs9939609). 시상하부 식탐 회로와 위장관 미주신경. 배고픔/배부름 신호 알고리즘.', textEn:'Food Intake Volume — FTO (rs9939609). Hypothalamic appetite circuit and gastrointestinal vagus nerve. Hunger/satiety signaling algorithm.'},
-  {id:'t14', text:'알코올 의존도 — ADH4 (rs1042363). 뇌 보상회로와 간 행동축의 연결. 중독 취약성의 생물학적 배경.', textEn:'Alcohol Dependence — ADH4 (rs1042363). Connection between the brain\'s reward circuit and liver action axis. Biological background for addiction vulnerability.'},
+  {id:'t14', text:'알코올 의존도 — ADH4 (rs1042363). 뇌 보상회로와 간 행동축의 연결. 중독 취약성의 생물학적 배경.', textEn:"Alcohol Dependence — ADH4 (rs1042363). Connection between the brain's reward circuit and liver action axis. Biological background for addiction vulnerability."},
   {id:'t15', text:'아침형/저녁형 — PER3 (rs1801260). 시교차상핵과 송과체의 생체시계. 한국인 60~65% 저녁형.', textEn:'Morning / Evening Person — PER3 (rs1801260). Biological clock of the suprachiasmatic nucleus and pineal gland. 60-65% of Koreans are evening types.'},
   {id:'t16', text:'머리카락 굵기 — EDAR (rs3827760). 모낭과 두피, 피부 조직 공유. 동아시아 특징적 변이.', textEn:'Hair Thickness — EDAR (rs3827760). Shared by hair follicles, scalp, and skin tissue. Characteristic East Asian variant.'},
   {id:'t17', text:'단기 기억력 — BDNF (rs6265). 해마와 전전두엽 대뇌피질 사이의 각인. 단기→장기 기억 전환.', textEn:'Short-Term Memory — BDNF (rs6265). Imprinting between the hippocampus and prefrontal cortex. Short-term to long-term memory conversion.'},
@@ -126,8 +126,8 @@ const CENTER_LINES = [
   {id:'t25', text:'쌍꺼풀 유무 — 다인자 유전. 안검 피하지방과 안면 근막. 한국인 30~40% 보유.', textEn:'Double Eyelids — Polygenic inheritance. Eyelid subcutaneous fat and facial fascia. Present in 30-40% of Koreans.'},
   {id:'t26', text:'와인 맛 구별 — TAS2R38 (rs713598). 혀 미뢰/후각상피와 전전두엽 인지. 고수 혐오와 동일 유전자.', textEn:'Wine Taste Discrimination — TAS2R38 (rs713598). Tongue taste buds/olfactory epithelium and prefrontal cognition. Same gene as cilantro aversion.'},
   {id:'t27', text:'내장 선호 — 위장관 회로. 위장관 상태와 뇌 보상회로 연결. 장내 세균의 영향.', textEn:'Offal (Organ Meat) Preference — Gastrointestinal circuit. Connection between GI tract status and brain reward circuit. Influence of gut microbiota.'},
-  {id:'t28', text:'초콜릿 선호 — 보상회로. 구강 감각과 간 대사, 뇌 보상회로의 연결고리.', textEn:'Chocolate Preference — Reward circuit. Link between oral sensation, liver metabolism, and the brain\'s reward circuit.'},
-  {id:'t29', text:'음주량 — 보상회로. 뇌 보상회로와 간 분해 능력의 줄다리기.', textEn:'Alcohol Consumption Volume — Reward circuit. Tug-of-war between the brain\'s reward circuit and the liver\'s breakdown capacity.'},
+  {id:'t28', text:'초콜릿 선호 — 보상회로. 구강 감각과 간 대사, 뇌 보상회로의 연결고리.', textEn:"Chocolate Preference — Reward circuit. Link between oral sensation, liver metabolism, and the brain's reward circuit."},
+  {id:'t29', text:'음주량 — 보상회로. 뇌 보상회로와 간 분해 능력의 줄다리기.', textEn:"Alcohol Consumption Volume — Reward circuit. Tug-of-war between the brain's reward circuit and the liver's breakdown capacity."},
   {id:'t30', text:'습관 형성 — 선조체. 전전두엽과 기저핵 선조체의 연결. 반복 행동의 생물학적 기반.', textEn:'Habit Formation — Striatum. Connection between the prefrontal cortex and basal ganglia striatum. Biological basis of repetitive behaviors.'},
   {id:'t31', text:'근육발달 — ACTN3 (rs1815739). 골격근 힘줄과 전신 운동신경. 폭발력 관련 스프린터 유전자.', textEn:'Muscle Development — ACTN3 (rs1815739). Skeletal muscle tendons and systemic motor nerves. Sprinter gene related to explosive power.'},
   {id:'t32', text:'지구력 — ACE I/D variant. 골격근 미토콘드리아와 심폐 혈관. 한국인 중 XX형 비율 높음.', textEn:'Endurance — ACE I/D variant. Skeletal muscle mitochondria and cardiopulmonary blood vessels. High proportion of XX type among Koreans.'},
@@ -140,7 +140,7 @@ const CENTER_LINES = [
   {id:'t39', text:'모기 물릴 확률 — HLA-DBQ1 (rs1052133). 피부 표면과 전신 염증/혈관 반응. 면역계에 의한 체취 결정.', textEn:'Mosquito Bite Susceptibility — HLA-DQB1 (rs1052133). Skin surface and systemic inflammation/vascular response. Body odor determined by the immune system.'},
   {id:'t40', text:'지능(IQ) — SHANK3, NR2B. 대뇌피질 네트워크와 해마 시냅스. 다인자 유전의 복합체.', textEn:'Intelligence (IQ) — SHANK3, NR2B. Cerebral cortex network and hippocampal synapses. Complex polygenic inheritance.'},
   {id:'t41', text:'정치성향 — DRD4 (rs1800955). 전전두엽 판단과 뇌 보상회로 연결. 환경적 영향이 지배적.', textEn:'Political Orientation — DRD4 (rs1800955). Prefrontal judgment and brain reward circuit connection. Dominant environmental influence.'},
-  {id:'t42', text:'사회적 거부 민감도 — OPRM1 (rs1799971). 변연계와 심장부근 사회통증 회로. 거절 시 뇌의 물리적 고통 반응.', textEn:'Social Rejection Sensitivity — OPRM1 (rs1799971). Limbic system and heart-adjacent social pain circuit. The brain\'s physical pain response to rejection.'},
+  {id:'t42', text:'사회적 거부 민감도 — OPRM1 (rs1799971). 변연계와 심장부근 사회통증 회로. 거절 시 뇌의 물리적 고통 반응.', textEn:"Social Rejection Sensitivity — OPRM1 (rs1799971). Limbic system and heart-adjacent social pain circuit. The brain's physical pain response to rejection."},
   {id:'t43', text:'수면시간 성향 — DEC2 (rs121912617). 시상하부 생체시계와 뇌간 조절. 6시간 수면 가능 희귀 변이.', textEn:'Sleep Duration Tendency — DEC2 (rs121912617). Hypothalamic biological clock and brainstem regulation. Rare variant allowing 6-hour sleep.'},
   {id:'t44', text:'피부 탄력/노화 — MMP1 (rs1799750). 진피층과 콜라겐 섬유아세포. 콜라겐 분해 효소 활성.', textEn:'Skin Elasticity / Aging — MMP1 (rs1799750). Dermis layer and collagen fibroblasts. Collagen-degrading enzyme activity.'},
   {id:'t45', text:'새로운 것 선호 — DRD4 7R variant. 보상회로 자극과 전전두엽 인지. 정치성향과 동일 유전자.', textEn:'Novelty Seeking — DRD4 7R variant. Reward circuit stimulation and prefrontal cognition. Same gene as political orientation.'},
@@ -155,7 +155,7 @@ const CENTER_LINES = [
   {id:'t54', text:'손실 회피 성향 — SLC6A4 (rs25531). 전전두엽 득실 판단과 편도체 공포.', textEn:'Loss Aversion Tendency — SLC6A4 (rs25531). Prefrontal cost-benefit judgment and amygdala fear.'},
   {id:'t55', text:'충동 강도 — 교감신경. 뇌 보상회로 자극과 교감신경 활성.', textEn:'Impulsivity Intensity — Sympathetic nervous system. Brain reward circuit stimulation and sympathetic nervous activity.'},
   {id:'t56', text:'노화 속도 — FOXO3 (rs2802292). 조절축 대사계와 근육 면역계 전체. 수명 세팅값.', textEn:'Aging Rate — FOXO3 (rs2802292). Regulatory axis metabolism and the entire muscular immune system. Lifespan set-point.'},
-  {id:'t57', text:'알츠하이머 위험도 — APOE e4. 뇌 해마 기억과 전신 지질/혈관 대사. 한국인 10~15% 보유.', textEn:'Alzheimer\'s Risk — APOE e4. Brain hippocampal memory and systemic lipid/vascular metabolism. Present in 10-15% of Koreans.'},
+  {id:'t57', text:'알츠하이머 위험도 — APOE e4. 뇌 해마 기억과 전신 지질/혈관 대사. 한국인 10~15% 보유.', textEn:"Alzheimer's Risk — APOE e4. Brain hippocampal memory and systemic lipid/vascular metabolism. Present in 10-15% of Koreans."},
   {id:'t58', text:'바이러스 취약성 — HLA 복합체. 전신 면역 림프와 호흡기 점막 방어.', textEn:'Viral Vulnerability — HLA complex. Systemic immune lymph and respiratory mucosal defense.'},
   {id:'t59', text:'다리 길이 비대칭 — 유전성 편측비대 관련. 한쪽 다리 길이 차이, 성장 메커니즘과 연관.', textEn:'Leg Length Asymmetry — Hereditary hemihypertrophy. Difference in the length of one leg, associated with growth mechanisms.'},
   {id:'t60', text:'근감소 경향 — ADAM8, BECN1, KLF4. 하체 근육량 유지·감소와 관련.', textEn:'Muscle Loss (Sarcopenia) Tendency — ADAM8, BECN1, KLF4. Related to the maintenance and loss of lower body muscle mass.'},
@@ -216,7 +216,6 @@ window.toggleLang = function() {
   } else {
     document.body.classList.remove('en-mode');
   }
-
 
   buildList(); 
   buildCenterText();
@@ -390,7 +389,6 @@ function buildList() {
   }, 100);
 }
 
-// 👇 여기가 사라졌던 그 '가운데 글씨'를 불러오는 중요한 함수야!
 function buildCenterText() {
   const box = document.getElementById('center-text-box');
   if (!box) return;
@@ -442,8 +440,9 @@ function updateTextHighlights() {
     }
   });
 }
+
 // ══════════════════════════════════════════════
-// MINIMAP DRAW (원본 1:1 완벽 맵핑)
+// MINIMAP DRAW
 // ══════════════════════════════════════════════
 function drawMinimap() {
   const canvas = document.getElementById('minimap-canvas');
@@ -458,7 +457,6 @@ function drawMinimap() {
     const isRelated = activeTrait && activeTrait.plei.includes(t.id);
     const fade = activeTrait && !isActive && !isRelated;
     
-    // 🎯 꼼수(압축, 이동) 싹 다 빼고 순수 100% 원본 비율로 바로 꽂아버리기!
     const x = t.bodyPos.x * cw;
     const y = t.bodyPos.y * ch;
     
@@ -479,6 +477,7 @@ function drawMinimap() {
   });
   ctx.globalAlpha = 1;
 }
+
 // ══════════════════════════════════════════════
 // CONNECT LINE
 // ══════════════════════════════════════════════
@@ -827,56 +826,51 @@ async function initSystem() {
     mmWrap.addEventListener('click', () => {
       mmWrap.classList.toggle('expanded');
       setTimeout(resizeCanvases, 450); 
-
-      
     });
-// 🎯 [에디터 모드] 마우스로 점 멱살 잡고 끌어다 놓기 (Drag & Drop)
-  const mmCanvas = document.getElementById('minimap-canvas');
-  let dragTrait = null;
 
-  if (mmCanvas) {
-    mmCanvas.addEventListener('mousedown', (e) => {
-      const rect = mmCanvas.getBoundingClientRect();
-      const clickX = (e.clientX - rect.left) / rect.width;
-      const clickY = (e.clientY - rect.top) / rect.height;
-      
-      let minDist = 0.05; // 마우스 인식 범위 (클릭한 곳에서 가장 가까운 점 찾기)
-      TRAITS.forEach(t => {
-        const dist = Math.hypot(t.bodyPos.x - clickX, t.bodyPos.y - clickY);
-        if (dist < minDist) { minDist = dist; dragTrait = t; }
+    // 🎯 [에디터 모드] 마우스로 점 멱살 잡고 끌어다 놓기 (Drag & Drop)
+    const mmCanvas = document.getElementById('minimap-canvas');
+    let dragTrait = null;
+
+    if (mmCanvas) {
+      mmCanvas.addEventListener('mousedown', (e) => {
+        const rect = mmCanvas.getBoundingClientRect();
+        const clickX = (e.clientX - rect.left) / rect.width;
+        const clickY = (e.clientY - rect.top) / rect.height;
+        
+        let minDist = 0.05; // 마우스 인식 범위
+        TRAITS.forEach(t => {
+          const dist = Math.hypot(t.bodyPos.x - clickX, t.bodyPos.y - clickY);
+          if (dist < minDist) { minDist = dist; dragTrait = t; }
+        });
       });
-    });
 
-    mmCanvas.addEventListener('mousemove', (e) => {
-      if (!dragTrait) return; // 잡은 점이 없으면 무시
-      const rect = mmCanvas.getBoundingClientRect();
-      
-      // 마우스를 따라 점의 x, y 좌표가 실시간으로 변함
-      dragTrait.bodyPos.x = (e.clientX - rect.left) / rect.width;
-      dragTrait.bodyPos.y = (e.clientY - rect.top) / rect.height;
-      
-      requestDrawLine(); // 변경된 위치로 화면 즉시 렌더링
-    });
-
-    mmCanvas.addEventListener('mouseup', () => { dragTrait = null; });
-    mmCanvas.addEventListener('mouseleave', () => { dragTrait = null; });
-
-    // 🎯 맵핑을 다 끝내고 "더블 클릭"하면 코드가 완성됨!
-    mmCanvas.addEventListener('dblclick', () => {
-      // 콘솔창에 복사하기 쉽게 출력
-      let output = "const TRAITS = [\n";
-      TRAITS.forEach(t => {
-        output += `  {id:'${t.id}', cats:['${t.cats.join("','")}'], name:'${t.name}', nameEn:'${t.nameEn}', gene:'${t.gene}', lm:'${t.lm}', lm2:${t.lm2 ? "'"+t.lm2+"'" : null}, assoc:${t.assoc}, vis:'${t.vis}', bodyPos:{x:${t.bodyPos.x.toFixed(3)}, y:${t.bodyPos.y.toFixed(3)}}, plei:[${t.plei.map(p=>"'"+p+"'").join(',')}]},\n`;
+      mmCanvas.addEventListener('mousemove', (e) => {
+        if (!dragTrait) return; 
+        const rect = mmCanvas.getBoundingClientRect();
+        
+        dragTrait.bodyPos.x = (e.clientX - rect.left) / rect.width;
+        dragTrait.bodyPos.y = (e.clientY - rect.top) / rect.height;
+        
+        requestDrawLine(); 
       });
-      output += "];";
-      
-      console.log("👇 아래 코드를 복사해서 script.js의 TRAITS 배열에 통째로 덮어쓰세요! 👇");
-      console.log(output);
-      alert("F12(개발자 도구) 콘솔창을 열면 업데이트된 코드가 있습니다!\n복사해서 원본에 덮어쓰기 하세요.");
-    });
-  }
-} // 👈 원래 있던 initSystem() 함수의 마지막 닫는 괄호
 
+      mmCanvas.addEventListener('mouseup', () => { dragTrait = null; });
+      mmCanvas.addEventListener('mouseleave', () => { dragTrait = null; });
+
+      mmCanvas.addEventListener('dblclick', () => {
+        let output = "const TRAITS = [\n";
+        TRAITS.forEach(t => {
+          output += `  {id:'${t.id}', cats:['${t.cats.join("','")}'], name:'${t.name}', nameEn:'${t.nameEn}', gene:'${t.gene}', lm:'${t.lm}', lm2:${t.lm2 ? "'"+t.lm2+"'" : null}, assoc:${t.assoc}, vis:'${t.vis}', bodyPos:{x:${t.bodyPos.x.toFixed(3)}, y:${t.bodyPos.y.toFixed(3)}}, plei:[${t.plei.map(p=>"'"+p+"'").join(',')}]},\n`;
+        });
+        output += "];";
+        
+        console.log("👇 아래 코드를 복사해서 script.js의 TRAITS 배열에 통째로 덮어쓰세요! 👇");
+        console.log(output);
+        alert("F12(개발자 도구) 콘솔창을 열면 업데이트된 코드가 있습니다!\n복사해서 원본에 덮어쓰기 하세요.");
+      });
+    }
+  } // 👈 이 괄호가 여기 있어야 정상적으로 미니맵 생성 영역이 닫힘!
 
   if (!document.getElementById('ppl-png')) {
     const pplImg = document.createElement('img');
@@ -885,7 +879,6 @@ async function initSystem() {
     document.body.appendChild(pplImg);
   }
 
-  // 👇 여기서 처음 화면이 열릴 때 buildList와 buildCenterText가 차례대로 실행됨!
   if (!listBuilt) {
     buildList();
     buildCenterText();
@@ -947,6 +940,6 @@ async function initSystem() {
       setTimeout(resizeCanvases, 450);
     });
   }
-}
+} // 👈 여기가 진짜 initSystem() 함수의 끝!
 
 window.addEventListener('DOMContentLoaded', initSystem);

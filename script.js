@@ -1,6 +1,7 @@
 // ══════════════════════════════════════════════
 // DATA (따옴표 에러 완벽 수정본!)
 // ══════════════════════════════════════════════
+
 const TRAITS = [
   {id:'t1', cats:['대사'], name:'카페인 분해속도', nameEn:'Caffeine Metabolism Rate', gene:'CYP1A2 rs762551', lm:'LIVER', lm2:'BRAIN_C', assoc:5, vis:'조건부', bodyPos:{x:0.420, y:0.420}, plei:['t34']},
   {id:'t11', cats:['감각'], name:'매운맛 선호도', nameEn:'Spicy Food Preference', gene:'TRPV1 rs8065080', lm:'MOUTH_R', lm2:'STOMACH', assoc:3.5, vis:'조건부', bodyPos:{x:0.486, y:0.221}, plei:[]},

@@ -3,7 +3,6 @@
 // DATA (수동 맵핑 좌표 완벽 통합 + 에러 수정 완료)
 // ══════════════════════════════════════════════
 const TRAITS = [
-const TRAITS = [
   {id:'t1', cats:['대사'], name:'카페인 분해속도', nameEn:'Caffeine Metabolism Rate', gene:'CYP1A2 rs762551', lm:'LIVER', lm2:'BRAIN_C', assoc:5, vis:'조건부', bodyPos:{x:0.420, y:0.420}, plei:['t34']},
   {id:'t11', cats:['감각'], name:'매운맛 선호도', nameEn:'Spicy Food Preference', gene:'TRPV1 rs8065080', lm:'MOUTH_R', lm2:'STOMACH', assoc:3.5, vis:'조건부', bodyPos:{x:0.440, y:0.170}, plei:[]},
   {id:'t21', cats:['감각','신체'], name:'암내', nameEn:'Body Odor', gene:'ABCC11 rs1782293', lm:'ARM_L', lm2:'CHEEK_C', assoc:5, vis:'조건부', bodyPos:{x:0.381, y:0.247}, plei:['t5']},

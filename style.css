@@ -549,9 +549,9 @@ body.en-mode .ti {
   top: 0; left: 0;
   width: 18px; height: 18px;
   border-radius: 50%;
-  background: #ffff00;              /* 기본 검정 */
-  pointer-events: none;          /* 커서가 클릭/호버 막지 않게 */
-  z-index: 99999;                /* 항상 맨 위 */
+  background: #ffff00;              
+  pointer-events: none;         
+  z-index: 99999;              
   transform: translate(-50%, -50%);
   transition: background-color 0.12s ease;
   will-change: transform;

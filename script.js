@@ -1,84 +1,84 @@
 // ══════════════════════════════════════════════
-// DATA
+// DATA (수동 맵핑 좌표 완벽 유지본)
 // ══════════════════════════════════════════════
 const TRAITS = [
-  {id:'t1', cats:['대사'], name:'카페인 분해속도', nameEn:'Caffeine Metabolism Rate', gene:'CYP1A2 rs762551', lm:'LIVER', lm2:'BRAIN_C', assoc:5, vis:'조건부', bodyPos:{x:0.420, y:0.420}, plei:['t34']},
-  {id:'t11', cats:['감각'], name:'매운맛 선호도', nameEn:'Spicy Food Preference', gene:'TRPV1 rs8065080', lm:'MOUTH_R', lm2:'STOMACH', assoc:3.5, vis:'조건부', bodyPos:{x:0.486, y:0.221}, plei:[]},
-  {id:'t21', cats:['감각','신체'], name:'암내', nameEn:'Body Odor', gene:'ABCC11 rs1782293', lm:'ARM_L', lm2:'CHEEK_C', assoc:5, vis:'조건부', bodyPos:{x:0.381, y:0.247}, plei:['t5']},
-  {id:'t31', cats:['운동'], name:'근육발달', nameEn:'Muscle Development', gene:'ACTN3 rs1815739', lm:'ARM_R', lm2:'LOWER_L', assoc:4.5, vis:'조건부', bodyPos:{x:0.317, y:0.411}, plei:[]},
-  {id:'t41', cats:['행동','사회'], name:'정치성향', nameEn:'Political Orientation', gene:'DRD4 rs1800955', lm:'FOREHEAD_R', lm2:'BRAIN_CR', assoc:1, vis:'내적', bodyPos:{x:0.459, y:0.108}, plei:['t38','t45']},
+  {id:'t1', cats:['대사'], name:'카페인 분해속도', nameEn:'Caffeine Metabolism Rate', gene:'CYP1A2 rs762551', lm:'LIVER', lm2:'BRAIN_C', assoc:5, vis:'조건부', bodyPos:{x:0.445, y:0.403}, plei:['t34']},
+  {id:'t11', cats:['감각'], name:'매운맛 선호도', nameEn:'Spicy Food Preference', gene:'TRPV1 rs8065080', lm:'MOUTH_R', lm2:'STOMACH', assoc:3.5, vis:'조건부', bodyPos:{x:0.496, y:0.270}, plei:[]},
+  {id:'t21', cats:['감각','신체'], name:'암내', nameEn:'Body Odor', gene:'ABCC11 rs1782293', lm:'ARM_L', lm2:'CHEEK_C', assoc:5, vis:'조건부', bodyPos:{x:0.336, y:0.297}, plei:['t5']},
+  {id:'t31', cats:['운동'], name:'근육발달', nameEn:'Muscle Development', gene:'ACTN3 rs1815739', lm:'ARM_R', lm2:'LOWER_L', assoc:4.5, vis:'조건부', bodyPos:{x:0.331, y:0.454}, plei:[]},
+  {id:'t41', cats:['행동','사회'], name:'정치성향', nameEn:'Political Orientation', gene:'DRD4 rs1800955', lm:'FOREHEAD_R', lm2:'BRAIN_CR', assoc:1, vis:'내적', bodyPos:{x:0.553, y:0.086}, plei:['t38','t45']},
   {id:'t51', cats:['사회','인지'], name:'타인 신뢰 경향', nameEn:'Tendency to Trust Others', gene:'CD38 rs1044482', lm:'FOREHEAD', lm2:'CHEST_CL', assoc:3.5, vis:'내적', bodyPos:{x:0.490, y:0.259}, plei:['t6']},
   {id:'t61', cats:['운동'], name:'종아리/하체 근육 발달', nameEn:'Calf / Lower Body Muscle Dev.', gene:'ACTN3 rs1815739', lm:'LOWER_R', lm2:'LOWER_L', assoc:4.5, vis:'조건부', bodyPos:{x:0.620, y:0.800}, plei:['t60','t62']},
-  {id:'t71', cats:['신체'], name:'발가락 길이 비율', nameEn:'Toe Length Ratio', gene:'다인자 유전', lm:'LOWER_L', lm2:'LOWER_R', assoc:3.5, vis:'외적', bodyPos:{x:0.442, y:0.928}, plei:[]},
-  {id:'t2', cats:['감각'], name:'고수 혐오', nameEn:'Cilantro Aversion', gene:'OR6A2 rs2853248', lm:'NOSE', lm2:'MOUTH', assoc:4.5, vis:'조건부', bodyPos:{x:0.500, y:0.150}, plei:['t26']},
+  {id:'t71', cats:['신체'], name:'발가락 길이 비율', nameEn:'Toe Length Ratio', gene:'다인자 유전', lm:'LOWER_L', lm2:'LOWER_R', assoc:3.5, vis:'외적', bodyPos:{x:0.363, y:0.985}, plei:[]},
+  {id:'t2', cats:['감각'], name:'고수 혐오', nameEn:'Cilantro Aversion', gene:'OR6A2 rs2853248', lm:'NOSE', lm2:'MOUTH', assoc:4.5, vis:'조건부', bodyPos:{x:0.488, y:0.103}, plei:['t26']},
   {id:'t12', cats:['신체'], name:'모발 생성', nameEn:'Hair Formation', gene:'EDAR rs3827760', lm:'TOP', lm2:'CHEEK_R', assoc:4, vis:'외적', bodyPos:{x:0.501, y:0.129}, plei:['t16']},
   {id:'t22', cats:['신체','대사'], name:'BMI', nameEn:'BMI (Body Mass Index)', gene:'FTO rs1558902', lm:'BRAIN_B', lm2:'STOMACH_L', assoc:4, vis:'외적', bodyPos:{x:0.450, y:0.480}, plei:['t13']},
   {id:'t32', cats:['운동'], name:'지구력', nameEn:'Endurance', gene:'ACE I/D variant', lm:'LOWER_R', lm2:'CHEST_C', assoc:4, vis:'내적', bodyPos:{x:0.460, y:0.350}, plei:[]},
   {id:'t42', cats:['인지','사회'], name:'사회적 거부 민감도', nameEn:'Social Rejection Sensitivity', gene:'OPRM1 rs1799971', lm:'BRAIN_C', lm2:'CHEST_C', assoc:2, vis:'조건부', bodyPos:{x:0.466, y:0.243}, plei:[]},
-  {id:'t52', cats:['행동','인지'], name:'위기에서 숨는 성향', nameEn:'Tendency to Hide in Crises', gene:'교감신경', lm:'BRAIN_L', lm2:'CHEST_C', assoc:3, vis:'내적', bodyPos:{x:0.555, y:0.103}, plei:['t20','t55']},
+  {id:'t52', cats:['행동','인지'], name:'위기에서 숨는 성향', nameEn:'Tendency to Hide in Crises', gene:'교감신경', lm:'BRAIN_L', lm2:'CHEST_C', assoc:3, vis:'내적', bodyPos:{x:0.462, y:0.268}, plei:['t20','t55']},
   {id:'t62', cats:['운동'], name:'지구력형 하체 체질', nameEn:'Endurance Lower Body Type', gene:'ACE I/D variant', lm:'LOWER_L', lm2:'CHEST_C', assoc:4, vis:'내적', bodyPos:{x:0.427, y:0.796}, plei:['t61']},
   {id:'t72', cats:['신체'], name:'다리 털/체모 농도', nameEn:'Leg Hair / Body Hair Density', gene:'다인자 유전', lm:'LOWER_R', lm2:'LOWER_L', assoc:3, vis:'외적', bodyPos:{x:0.623, y:0.856}, plei:[]},
   {id:'t3', cats:['대사'], name:'알코올 홍조', nameEn:'Alcohol Flush Reaction', gene:'ALDH2 rs671', lm:'MOUTH', lm2:'LIVER', assoc:5, vis:'조건부', bodyPos:{x:0.380, y:0.320}, plei:[]},
   {id:'t13', cats:['대사','행동'], name:'먹는 양', nameEn:'Food Intake Volume', gene:'FTO rs9939609', lm:'BRAIN_B', lm2:'STOMACH', assoc:4.5, vis:'조건부', bodyPos:{x:0.550, y:0.440}, plei:['t22']},
   {id:'t23', cats:['인지','행동'], name:'불안감/기분조절', nameEn:'Anxiety / Mood Regulation', gene:'BDNF SLC6A4', lm:'BRAIN_L', lm2:'FOREHEAD', assoc:3.5, vis:'내적', bodyPos:{x:0.497, y:0.138}, plei:['t17','t54']},
-  {id:'t33', cats:['인지'], name:'행복기본값', nameEn:'Baseline Happiness', gene:'FAAH rs324420', lm:'BRAIN_CR2', lm2:'FOREHEAD', assoc:3, vis:'내적', bodyPos:{x:0.441, y:0.140}, plei:[]},
-  {id:'t43', cats:['행동'], name:'수면시간 성향', nameEn:'Sleep Duration Tendency', gene:'DEC2 rs121912617', lm:'BRAIN_B', lm2:'CHEST_R', assoc:4, vis:'내적', bodyPos:{x:0.546, y:0.116}, plei:[]},
-  {id:'t53', cats:['행동','사회'], name:'공격성 방향', nameEn:'Direction of Aggression', gene:'HTR2A rs6311', lm:'BRAIN_R', lm2:'FOREHEAD', assoc:3.5, vis:'내적', bodyPos:{x:0.520, y:0.107}, plei:[]},
+  {id:'t33', cats:['인지'], name:'행복기본값', nameEn:'Baseline Happiness', gene:'FAAH rs324420', lm:'BRAIN_CR2', lm2:'FOREHEAD', assoc:3, vis:'내적', bodyPos:{x:0.511, y:0.249}, plei:[]},
+  {id:'t43', cats:['행동'], name:'수면시간 성향', nameEn:'Sleep Duration Tendency', gene:'DEC2 rs121912617', lm:'BRAIN_B', lm2:'CHEST_R', assoc:4, vis:'내적', bodyPos:{x:0.457, y:0.259}, plei:[]},
+  {id:'t53', cats:['행동','사회'], name:'공격성 방향', nameEn:'Direction of Aggression', gene:'HTR2A rs6311', lm:'BRAIN_R', lm2:'FOREHEAD', assoc:3.5, vis:'내적', bodyPos:{x:0.507, y:0.089}, plei:[]},
   {id:'t63', cats:['감각'], name:'추위에 약한 하체 체감', nameEn:'Cold Sensitivity in Lower Body', gene:'ACTN3 rs1815739', lm:'LOWER_C', lm2:'ARM_R', assoc:4, vis:'조건부', bodyPos:{x:0.437, y:0.776}, plei:[]},
   {id:'t73', cats:['신체'], name:'하지 혈관 반응성', nameEn:'Lower Limb Vascular Reactivity', gene:'ACE 혈관조절 복합', lm:'LOWER_L', lm2:'CHEST_C', assoc:3.5, vis:'내적', bodyPos:{x:0.421, y:0.908}, plei:['t74']},
   {id:'t4', cats:['대사'], name:'유당불내증', nameEn:'Lactose Intolerance', gene:'LCT rs4988235', lm:'STOMACH', lm2:'LOWER_C', assoc:5, vis:'조건부', bodyPos:{x:0.500, y:0.440}, plei:[]},
   {id:'t14', cats:['행동','인지','대사'], name:'알코올 의존도', nameEn:'Alcohol Dependence', gene:'ADH4 rs1042363', lm:'BRAIN_CR', lm2:'LIVER', assoc:3.5, vis:'내적', bodyPos:{x:0.420, y:0.420}, plei:[]},
-  {id:'t24', cats:['신체'], name:'탈모 성향', nameEn:'Hair Loss Tendency', gene:'AR rs1385699', lm:'TOP_R', lm2:'BODY_C', assoc:4.5, vis:'외적', bodyPos:{x:0.515, y:0.123}, plei:[]},
-  {id:'t34', cats:['대사'], name:'알코올 취약도', nameEn:'Alcohol Vulnerability', gene:'CYP1A2 rs2031920', lm:'LIVER', lm2:'MOUTH', assoc:4, vis:'조건부', bodyPos:{x:0.620, y:0.320}, plei:['t1']},
+  {id:'t24', cats:['신체'], name:'탈모 성향', nameEn:'Hair Loss Tendency', gene:'AR rs1385699', lm:'TOP_R', lm2:'BODY_C', assoc:4.5, vis:'외적', bodyPos:{x:0.336, y:0.234}, plei:[]},
+  {id:'t34', cats:['대사'], name:'알코올 취약도', nameEn:'Alcohol Vulnerability', gene:'CYP1A2 rs2031920', lm:'LIVER', lm2:'MOUTH', assoc:4, vis:'조건부', bodyPos:{x:0.617, y:0.429}, plei:['t1']},
   {id:'t44', cats:['신체'], name:'피부 탄력/노화', nameEn:'Skin Elasticity / Aging', gene:'MMP1 rs1799750', lm:'CHEEK_R', lm2:'CHEEK_L', assoc:4, vis:'외적', bodyPos:{x:0.419, y:0.250}, plei:[]},
-  {id:'t54', cats:['인지','행동'], name:'손실 회피 성향', nameEn:'Loss Aversion Tendency', gene:'SLC6A4 rs25531', lm:'FOREHEAD_L', lm2:'BRAIN_L', assoc:4, vis:'내적', bodyPos:{x:0.486, y:0.129}, plei:['t23']},
-  {id:'t64', cats:['신체'], name:'엉덩이/골반 체형', nameEn:'Hip / Pelvis Body Shape', gene:'다인자 유전', lm:'LOWER_C', lm2:'STOMACH_B', assoc:4, vis:'외적', bodyPos:{x:0.500, y:0.620}, plei:['t67','t68']},
+  {id:'t54', cats:['인지','행동'], name:'손실 회피 성향', nameEn:'Loss Aversion Tendency', gene:'SLC6A4 rs25531', lm:'FOREHEAD_L', lm2:'BRAIN_L', assoc:4, vis:'내적', bodyPos:{x:0.400, y:0.177}, plei:['t23']},
+  {id:'t64', cats:['신체'], name:'엉덩이/골반 체형', nameEn:'Hip / Pelvis Body Shape', gene:'다인자 유전', lm:'LOWER_C', lm2:'STOMACH_B', assoc:4, vis:'외적', bodyPos:{x:0.465, y:0.598}, plei:['t67','t68']},
   {id:'t74', cats:['신체'], name:'하지 부종', nameEn:'Lower Limb Edema', gene:'순환·림프 관련 복합', lm:'LOWER_R', lm2:'LOWER_L', assoc:3.5, vis:'조건부', bodyPos:{x:0.584, y:0.745}, plei:['t73']},
-  {id:'t5', cats:['신체'], name:'마른 귀지', nameEn:'Dry Earwax', gene:'ABCC11 rs1782293', lm:'R_EAR', lm2:'BRAIN_B', assoc:5, vis:'내적', bodyPos:{x:0.525, y:0.144}, plei:['t21']},
+  {id:'t5', cats:['신체'], name:'마른 귀지', nameEn:'Dry Earwax', gene:'ABCC11 rs1782293', lm:'R_EAR', lm2:'BRAIN_B', assoc:5, vis:'내적', bodyPos:{x:0.599, y:0.081}, plei:['t21']},
   {id:'t15', cats:['행동'], name:'아침형/저녁형', nameEn:'Morning / Evening Person', gene:'PER3 rs1801260', lm:'BRAIN_C', lm2:'BRAIN_B', assoc:4, vis:'내적', bodyPos:{x:0.470, y:0.136}, plei:[]},
-  {id:'t25', cats:['신체'], name:'쌍꺼풀 유무', nameEn:'Double Eyelids', gene:'다인자 유전', lm:'R_EYE', lm2:'L_EYE', assoc:4, vis:'외적', bodyPos:{x:0.476, y:0.139}, plei:[]},
-  {id:'t35', cats:['인지','행동'], name:'우울증 민감도', nameEn:'Depression Sensitivity', gene:'LHPP SIRT1', lm:'FOREHEAD', lm2:'CHEST_R', assoc:2.5, vis:'내적', bodyPos:{x:0.544, y:0.139}, plei:[]},
-  {id:'t45', cats:['행동','인지'], name:'새로운 것 선호', nameEn:'Novelty Seeking', gene:'DRD4 7R variant', lm:'BRAIN_CR3', lm2:'FOREHEAD', assoc:3.5, vis:'내적', bodyPos:{x:0.440, y:0.530}, plei:['t38','t41']},
-  {id:'t55', cats:['행동','인지'], name:'충동 강도', nameEn:'Impulsivity Intensity', gene:'교감신경', lm:'BRAIN_CR', lm2:'CHEST_R', assoc:4, vis:'조건부', bodyPos:{x:0.500, y:0.320}, plei:['t20','t52']},
+  {id:'t25', cats:['신체'], name:'쌍꺼풀 유무', nameEn:'Double Eyelids', gene:'다인자 유전', lm:'R_EYE', lm2:'L_EYE', assoc:4, vis:'외적', bodyPos:{x:0.465, y:0.069}, plei:[]},
+  {id:'t35', cats:['인지','행동'], name:'우울증 민감도', nameEn:'Depression Sensitivity', gene:'LHPP SIRT1', lm:'FOREHEAD', lm2:'CHEST_R', assoc:2.5, vis:'내적', bodyPos:{x:0.531, y:0.333}, plei:[]},
+  {id:'t45', cats:['행동','인지'], name:'새로운 것 선호', nameEn:'Novelty Seeking', gene:'DRD4 7R variant', lm:'BRAIN_CR3', lm2:'FOREHEAD', assoc:3.5, vis:'내적', bodyPos:{x:0.469, y:0.518}, plei:['t38','t41']},
+  {id:'t55', cats:['행동','인지'], name:'충동 강도', nameEn:'Impulsivity Intensity', gene:'교감신경', lm:'BRAIN_CR', lm2:'CHEST_R', assoc:4, vis:'조건부', bodyPos:{x:0.527, y:0.293}, plei:['t20','t52']},
   {id:'t65', cats:['신체'], name:'허벅지 근육량 경향', nameEn:'Thigh Muscle Mass Tendency', gene:'FTO MC4R ACTN3', lm:'LOWER_L', lm2:'LOWER_R', assoc:4, vis:'조건부', bodyPos:{x:0.450, y:0.700}, plei:['t66']},
   {id:'t75', cats:['신체'], name:'엉덩이-허벅지 비율', nameEn:'Hip-to-Thigh Ratio', gene:'다인자 유전', lm:'LOWER_C', lm2:'STOMACH_L', assoc:4, vis:'외적', bodyPos:{x:0.460, y:0.630}, plei:['t64']},
-  {id:'t6', cats:['인지','사회'], name:'공감능력', nameEn:'Empathy', gene:'OXTR rs53576', lm:'FOREHEAD', lm2:'CHEST_C', assoc:3.5, vis:'내적', bodyPos:{x:0.510, y:0.094}, plei:['t19','t51']},
-  {id:'t16', cats:['신체'], name:'머리카락 굵기', nameEn:'Hair Thickness', gene:'EDAR rs3827760', lm:'TOP', lm2:'CHEEK_L', assoc:4, vis:'외적', bodyPos:{x:0.509, y:0.122}, plei:['t12']},
+  {id:'t6', cats:['인지','사회'], name:'공감능력', nameEn:'Empathy', gene:'OXTR rs53576', lm:'FOREHEAD', lm2:'CHEST_C', assoc:3.5, vis:'내적', bodyPos:{x:0.496, y:0.092}, plei:['t19','t51']},
+  {id:'t16', cats:['신체'], name:'머리카락 굵기', nameEn:'Hair Thickness', gene:'EDAR rs3827760', lm:'TOP', lm2:'CHEEK_L', assoc:4, vis:'외적', bodyPos:{x:0.520, y:0.020}, plei:['t12']},
   {id:'t26', cats:['감각','인지'], name:'와인 맛 구별', nameEn:'Wine Taste Discrimination', gene:'TAS2R38 rs713598', lm:'MOUTH_L', lm2:'FOREHEAD', assoc:4, vis:'조건부', bodyPos:{x:0.560, y:0.170}, plei:['t2']},
   {id:'t36', cats:['운동','행동'], name:'걷기 성향', nameEn:'Walking Tendency', gene:'소뇌/척수', lm:'TOP', lm2:'LOWER_C', assoc:3.5, vis:'내적', bodyPos:{x:0.500, y:0.550}, plei:[]},
-  {id:'t46', cats:['감각','인지'], name:'향기 경험 성향', nameEn:'Fragrance Experience Tendency', gene:'변연계', lm:'NOSE', lm2:'BRAIN_C', assoc:4, vis:'조건부', bodyPos:{x:0.530, y:0.150}, plei:[]},
+  {id:'t46', cats:['감각','인지'], name:'향기 경험 성향', nameEn:'Fragrance Experience Tendency', gene:'변연계', lm:'NOSE', lm2:'BRAIN_C', assoc:4, vis:'조건부', bodyPos:{x:0.449, y:0.295}, plei:[]},
   {id:'t56', cats:['노화'], name:'노화 속도', nameEn:'Aging Rate', gene:'FOXO3 rs2802292', lm:'LIVER', lm2:'ARM_L', assoc:4.5, vis:'내적', bodyPos:{x:0.500, y:0.550}, plei:[]},
   {id:'t66', cats:['신체'], name:'피하지방 분포', nameEn:'Subcutaneous Fat Distribution', gene:'FTO MC4R', lm:'STOMACH_B', lm2:'LOWER_C', assoc:4, vis:'조건부', bodyPos:{x:0.550, y:0.650}, plei:['t65']},
   {id:'t76', cats:['신체'], name:'골반 폭', nameEn:'Pelvis Width', gene:'다인자 유전', lm:'STOMACH_B', lm2:'LOWER_C', assoc:4, vis:'외적', bodyPos:{x:0.540, y:0.600}, plei:['t64']},
   {id:'t7', cats:['행동','인지'], name:'강박성 성향', nameEn:'Obsessive-Compulsive Tendency', gene:'전전두엽-기저핵', lm:'FOREHEAD', lm2:'BRAIN_C', assoc:3, vis:'내적', bodyPos:{x:0.486, y:0.097}, plei:[]},
   {id:'t17', cats:['인지'], name:'단기 기억력', nameEn:'Short-Term Memory', gene:'BDNF rs6265', lm:'TEMPLE_R', lm2:'FOREHEAD', assoc:4, vis:'내적', bodyPos:{x:0.497, y:0.131}, plei:['t23']},
   {id:'t27', cats:['대사','감각'], name:'내장 선호', nameEn:'Offal (Organ Meat) Preference', gene:'위장관 회로', lm:'STOMACH', lm2:'BRAIN_CR', assoc:3.5, vis:'조건부', bodyPos:{x:0.550, y:0.440}, plei:[]},
-  {id:'t37', cats:['행동'], name:'폭력성', nameEn:'Aggressiveness / Violence', gene:'MAOA rs909525', lm:'BRAIN_L', lm2:'FOREHEAD', assoc:3, vis:'내적', bodyPos:{x:0.502, y:0.127}, plei:[]},
+  {id:'t37', cats:['행동'], name:'폭력성', nameEn:'Aggressiveness / Violence', gene:'MAOA rs909525', lm:'BRAIN_L', lm2:'FOREHEAD', assoc:3, vis:'내적', bodyPos:{x:0.501, y:0.102}, plei:[]},
   {id:'t47', cats:['신체'], name:'뼈 관련 형질', nameEn:'Bone-related Traits', gene:'골세포', lm:'ARM_L', lm2:'LOWER_R', assoc:4, vis:'조건부', bodyPos:{x:0.500, y:0.400}, plei:[]},
-  {id:'t57', cats:['노화','인지'], name:'알츠하이머 위험도', nameEn:"Alzheimer's Risk", gene:'APOE e4 variant', lm:'TOP', lm2:'CHEST_C', assoc:5, vis:'내적', bodyPos:{x:0.500, y:0.100}, plei:[]},
+  {id:'t57', cats:['노화','인지'], name:'알츠하이머 위험도', nameEn:'Alzheimers Risk', gene:'APOE e4 variant', lm:'TOP', lm2:'CHEST_C', assoc:5, vis:'내적', bodyPos:{x:0.480, y:0.259}, plei:[]},
   {id:'t67', cats:['신체'], name:'발 크기/발 모양', nameEn:'Foot Size / Foot Shape', gene:'다인자 유전', lm:'LOWER_L', lm2:'LOWER_R', assoc:3.5, vis:'외적', bodyPos:{x:0.412, y:0.925}, plei:[]},
   {id:'t77', cats:['신체'], name:'하지 관절 가동성', nameEn:'Lower Limb Joint Mobility', gene:'COL계열 결합조직 복합', lm:'LOWER_L', lm2:'LOWER_R', assoc:3.5, vis:'조건부', bodyPos:{x:0.598, y:0.895}, plei:[]},
-  {id:'t8', cats:['인지'], name:'희망/기대 성향', nameEn:'Hope / Expectation Tendency', gene:'해마/변연계', lm:'BRAIN_T', lm2:'BRAIN_CL', assoc:3, vis:'내적', bodyPos:{x:0.501, y:0.172}, plei:[]},
-  {id:'t18', cats:['감각','인지'], name:'통증 민감도', nameEn:'Pain Sensitivity', gene:'COMT rs4680', lm:'BODY_C', lm2:'BRAIN_L', assoc:4, vis:'조건부', bodyPos:{x:0.533, y:0.113}, plei:[]},
+  {id:'t8', cats:['인지'], name:'희망/기대 성향', nameEn:'Hope / Expectation Tendency', gene:'해마/변연계', lm:'BRAIN_T', lm2:'BRAIN_CL', assoc:3, vis:'내적', bodyPos:{x:0.716, y:0.242}, plei:[]},
+  {id:'t18', cats:['감각','인지'], name:'통증 민감도', nameEn:'Pain Sensitivity', gene:'COMT rs4680', lm:'BODY_C', lm2:'BRAIN_L', assoc:4, vis:'조건부', bodyPos:{x:0.462, y:0.274}, plei:[]},
   {id:'t28', cats:['대사','감각'], name:'초콜릿 선호', nameEn:'Chocolate Preference', gene:'보상회로', lm:'MOUTH', lm2:'LIVER', assoc:3.5, vis:'조건부', bodyPos:{x:0.500, y:0.190}, plei:[]},
   {id:'t38', cats:['행동','인지'], name:'불확실성 선호', nameEn:'Uncertainty Preference', gene:'DRD4 7R variant', lm:'FOREHEAD_L', lm2:'BRAIN_B', assoc:3, vis:'내적', bodyPos:{x:0.482, y:0.131}, plei:['t41','t45']},
   {id:'t48', cats:['감각'], name:'후각 민감성', nameEn:'Olfactory Sensitivity', gene:'후각상피', lm:'NOSE_L', lm2:'BRAIN_R', assoc:4, vis:'조건부', bodyPos:{x:0.500, y:0.150}, plei:[]},
-  {id:'t58', cats:['면역'], name:'바이러스 취약성', nameEn:'Viral Vulnerability', gene:'HLA rs2395029', lm:'CHEST_B', lm2:'NOSE', assoc:4.5, vis:'조건부', bodyPos:{x:0.500, y:0.360}, plei:[]},
-  {id:'t68', cats:['신체'], name:'발목 유연성', nameEn:'Ankle Flexibility', gene:'다인자 유전', lm:'LOWER_R', lm2:'LOWER_L', assoc:3.5, vis:'외적', bodyPos:{x:0.644, y:0.919}, plei:[]},
-  {id:'t9', cats:['사회','인지'], name:'사회성', nameEn:'Sociability', gene:'사회인지 네트워크', lm:'BRAIN_CR', lm2:'TEMPLE_L', assoc:3.5, vis:'내적', bodyPos:{x:0.556, y:0.125}, plei:[]},
+  {id:'t58', cats:['면역'], name:'바이러스 취약성', nameEn:'Viral Vulnerability', gene:'HLA rs2395029', lm:'CHEST_B', lm2:'NOSE', assoc:4.5, vis:'조건부', bodyPos:{x:0.251, y:0.400}, plei:[]},
+  {id:'t68', cats:['신체'], name:'발목 유연성', nameEn:'Ankle Flexibility', gene:'다인자 유전', lm:'LOWER_R', lm2:'LOWER_L', assoc:3.5, vis:'외적', bodyPos:{x:0.625, y:0.937}, plei:[]},
+  {id:'t9', cats:['사회','인지'], name:'사회성', nameEn:'Sociability', gene:'사회인지 네트워크', lm:'BRAIN_CR', lm2:'TEMPLE_L', assoc:3.5, vis:'내적', bodyPos:{x:0.566, y:0.555}, plei:[]},
   {id:'t19', cats:['인지','행동'], name:'스트레스 회복력', nameEn:'Stress Resilience', gene:'OXTR rs2254298', lm:'BRAIN_C', lm2:'CHEST_C', assoc:3, vis:'내적', bodyPos:{x:0.577, y:0.255}, plei:['t6','t51']},
   {id:'t29', cats:['대사','행동'], name:'음주량', nameEn:'Alcohol Consumption Volume', gene:'보상회로', lm:'BRAIN_CR', lm2:'LIVER', assoc:4, vis:'조건부', bodyPos:{x:0.446, y:0.326}, plei:[]},
-  {id:'t39', cats:['면역','감각'], name:'모기 물릴 확률', nameEn:'Mosquito Bite Susceptibility', gene:'HLA-DBQ1 rs1052133', lm:'ARM_R2', lm2:'BODY_C', assoc:4, vis:'조건부', bodyPos:{x:0.354, y:0.543}, plei:[]},
+  {id:'t39', cats:['면역','감각'], name:'모기 물릴 확률', nameEn:'Mosquito Bite Susceptibility', gene:'HLA-DBQ1 rs1052133', lm:'ARM_R2', lm2:'BODY_C', assoc:4, vis:'조건부', bodyPos:{x:0.459, y:0.492}, plei:[]},
   {id:'t49', cats:['감각','대사'], name:'단맛 민감도', nameEn:'Sweetness Sensitivity', gene:'FGF21 rs7590720', lm:'MOUTH_B', lm2:'BRAIN_B', assoc:4, vis:'조건부', bodyPos:{x:0.500, y:0.190}, plei:[]},
   {id:'t59', cats:['신체'], name:'다리 길이 비대칭', nameEn:'Leg Length Asymmetry', gene:'유전성 편측비대 관련', lm:'LOWER_L', lm2:'LOWER_R', assoc:5, vis:'외적', bodyPos:{x:0.417, y:0.748}, plei:[]},
   {id:'t69', cats:['신체'], name:'무릎 통증 취약성', nameEn:'Knee Pain Vulnerability', gene:'다인자 유전', lm:'LOWER_L', lm2:'LOWER_R', assoc:3.5, vis:'조건부', bodyPos:{x:0.420, y:0.840}, plei:[]},
   {id:'t10', cats:['감각'], name:'후각 반응', nameEn:'Olfactory Response', gene:'후각수용체', lm:'NOSE_L', lm2:'BRAIN_L', assoc:4, vis:'조건부', bodyPos:{x:0.530, y:0.150}, plei:[]},
-  {id:'t20', cats:['운동','행동'], name:'단기 폭발 에너지', nameEn:'Short-Term Explosive Energy', gene:'ACTN3 rs1815739', lm:'CHEST_R', lm2:'ARM_R', assoc:4.5, vis:'조건부', bodyPos:{x:0.360, y:0.340}, plei:['t52','t55']},
-  {id:'t30', cats:['인지','행동'], name:'습관 형성', nameEn:'Habit Formation', gene:'선조체', lm:'FOREHEAD', lm2:'BRAIN_C', assoc:4, vis:'내적', bodyPos:{x:0.491, y:0.119}, plei:[]},
-  {id:'t40', cats:['인지'], name:'지능(IQ)', nameEn:'Intelligence (IQ)', gene:'SHANK3 NR2B', lm:'TOP', lm2:'BRAIN_C', assoc:3.5, vis:'내적', bodyPos:{x:0.517, y:0.116}, plei:[]},
+  {id:'t20', cats:['운동','행동'], name:'단기 폭발 에너지', nameEn:'Short-Term Explosive Energy', gene:'ACTN3 rs1815739', lm:'CHEST_R', lm2:'ARM_R', assoc:4.5, vis:'조건부', bodyPos:{x:0.391, y:0.353}, plei:['t52','t55']},
+  {id:'t30', cats:['인지','행동'], name:'습관 형성', nameEn:'Habit Formation', gene:'선조체', lm:'FOREHEAD', lm2:'BRAIN_C', assoc:4, vis:'내적', bodyPos:{x:0.589, y:0.228}, plei:[]},
+  {id:'t40', cats:['인지'], name:'지능(IQ)', nameEn:'Intelligence (IQ)', gene:'SHANK3 NR2B', lm:'TOP', lm2:'BRAIN_C', assoc:3.5, vis:'내적', bodyPos:{x:0.539, y:0.051}, plei:[]},
   {id:'t50', cats:['대사','행동'], name:'잦은 식사 횟수', nameEn:'Frequent Eating', gene:'인슐린 축', lm:'BRAIN_B', lm2:'STOMACH_R', assoc:3.5, vis:'내적', bodyPos:{x:0.550, y:0.440}, plei:[]},
   {id:'t60', cats:['신체'], name:'근감소 경향', nameEn:'Muscle Loss (Sarcopenia) Tendency', gene:'ADAM8 BECN1 KLF4', lm:'LOWER_C', lm2:'ARM_L', assoc:4.5, vis:'조건부', bodyPos:{x:0.454, y:0.720}, plei:['t61']},
-  {id:'t70', cats:['신체'], name:'발바닥 압력/보행 패턴', nameEn:'Plantar Pressure / Gait Pattern', gene:'복합유전', lm:'LOWER_C', lm2:'LOWER_L', assoc:3, vis:'조건부', bodyPos:{x:0.431, y:0.805}, plei:[]}
+  {id:'t70', cats:['신체'], name:'발바닥 압력/보행 패턴', nameEn:'Plantar Pressure / Gait Pattern', gene:'복합유전', lm:'LOWER_C', lm2:'LOWER_L', assoc:3, vis:'조건부', bodyPos:{x:0.431, y:0.805}, plei:[]},
 ];
 
 const CATEGORY_INFO = [
@@ -88,7 +88,7 @@ const CATEGORY_INFO = [
   {name:'행동', nameEn:'BEHAVIOR', color:'#FE01FF'},   
   {name:'인지', nameEn:'COGNITION', color:'#03FB9B'}, 
   {name:'운동', nameEn:'MOTOR', color:'#7B67ED'},     
-  {name:'사회', nameEn:'SOCIAL', color:'#ADFF30'},     
+  {name:'사회', nameEn:'SOCIAL', color:'#f2ff36'},     
   {name:'노화', nameEn:'AGING', color:'#0000FF'},      
   {name:'면역', nameEn:'IMMUNE', color:'#00B8F3'}      
 ];
@@ -97,6 +97,30 @@ const CAT_C = CATEGORY_INFO.reduce((acc, curr) => {
   acc[curr.name] = curr.color;
   return acc;
 }, {});
+// ══════════════════════════════════════════════
+// ⬇️ 이 위에 기존 TRAITS / CATEGORY_INFO / CAT_C 세 개만
+//    그대로 붙여넣으세요. (CENTER_LINES 와 SYSTEM_EN 은 아래에 이미 포함)
+// ══════════════════════════════════════════════
+// ══════════════════════════════════════════════
+// ⬇️ 이 위에 기존 TRAITS / CATEGORY_INFO / CAT_C 세 개만
+//    그대로 붙여넣으세요. (CENTER_LINES 와 SYSTEM_EN 은 아래에 이미 포함)
+// ══════════════════════════════════════════════
+// ══════════════════════════════════════════════
+// ⬇️ 이 위에 기존 TRAITS / CATEGORY_INFO / CAT_C 세 개만
+//    그대로 붙여넣으세요. (CENTER_LINES 와 SYSTEM_EN 은 아래에 이미 포함)
+// ══════════════════════════════════════════════
+// ══════════════════════════════════════════════
+// ⬇️ 이 위에 기존 TRAITS / CATEGORY_INFO / CAT_C 세 개만
+//    그대로 붙여넣으세요. (CENTER_LINES 와 SYSTEM_EN 은 아래에 이미 포함)
+// ══════════════════════════════════════════════
+// ══════════════════════════════════════════════
+// ⬇️ 이 위에 기존 TRAITS / CATEGORY_INFO / CAT_C 세 개만
+//    그대로 붙여넣으세요. (CENTER_LINES 와 SYSTEM_EN 은 아래에 이미 포함)
+// ══════════════════════════════════════════════
+// ══════════════════════════════════════════════
+// ⬇️ 이 위에 기존 TRAITS / CATEGORY_INFO / CAT_C 세 개만
+//    그대로 붙여넣으세요. (CENTER_LINES 와 SYSTEM_EN 은 아래에 이미 포함)
+// ══════════════════════════════════════════════
 
 const CENTER_LINES = [
   {id:'t1', text:'카페인 분해속도 — CYP1A2 (rs762551). 간과 중추신경계의 동시 반응. 흡연 여부가 분해속도를 바꾼다.', textEn:'Caffeine Metabolism Rate — CYP1A2 (rs762551). Simultaneous response of the liver and central nervous system. Smoking status alters the metabolism rate.'},
@@ -178,10 +202,39 @@ const CENTER_LINES = [
   {id:'t77', text:'하지 관절 가동성 — COL계열 결합조직 복합. 무릎·발목·고관절 유연성.', textEn:'Lower Limb Joint Mobility — COL connective tissue. Flexibility of the knee, ankle, and hip joints.'},
 ];
 
+// EN 모드에서 칩에 뜨는 '한글 시스템 이름'을 영어로 바꾸는 매핑
+// (CYP1A2 같은 실제 유전자 코드는 여기 없으니 그대로 유지됨)
+const SYSTEM_EN = {
+  '혈관조절 복합 보상회로': 'Vascular regulation complex compensatory circuit',
+  '사회인지 네트워크': 'Social cognition network',
+  '복합유전': 'Complex (polygenic) inheritance',
+  '인슐린 축': 'Insulin axis',
+  '유전성 편측비대 관련': 'Hereditary hemihypertrophy–related',
+  '후각상피': 'Olfactory epithelium',
+  '해마/변연계': 'Hippocampus / limbic system',
+  '다인자 유전': 'Multifactorial inheritance',
+  '교감신경': 'Sympathetic nervous system',
+  'ACE 혈관조절 복합': 'ACE vascular regulation complex',
+  '위장관 회로': 'Gastrointestinal (GI) circuit',
+  '골세포': 'Osteocyte (bone cell)',
+  '순환·림프 관련 복합': 'Circulatory & lymphatic–related complex',
+  '보상회로': 'Reward circuit',
+  '선조체': 'Striatum',
+  '후각수용체': 'Olfactory receptors',
+  '후각 수용체': 'Olfactory receptors',
+  'COL계열 결합조직 복합': 'COL-family connective tissue complex',
+  '전전두엽-기저핵 회로': 'Prefrontal-basal ganglia circuit',
+  '전전두엽-기저핵': 'Prefrontal-basal ganglia circuit',
+  '소뇌/척수': 'Cerebellum / spinal cord',
+  '변연계': 'Limbic system',
+};
+
+// ══════════════════════════════════════════════
+
 // ══════════════════════════════════════════════
 // STATE
 // ══════════════════════════════════════════════
-let currentLang = 'ko'; 
+let currentLang = 'ko';
 
 let holistic = null, lastResults = null, activeTrait = null;
 let smoothedPos = {};
@@ -217,13 +270,13 @@ window.toggleLang = function() {
     document.body.classList.remove('en-mode');
   }
 
-  buildList(); 
+  buildList();
   buildCenterText();
 
   const camSub = document.querySelector('.cam-overlay-sub');
   if (camSub) {
-    camSub.innerHTML = currentLang === 'ko' 
-      ? '카메라에 얼굴을 비춰주세요<br>유전형질이 분석됩니다' 
+    camSub.innerHTML = currentLang === 'ko'
+      ? '카메라에 얼굴을 비춰주세요<br>유전형질이 분석됩니다'
       : 'Please show your face to the camera<br>Genetic traits will be analyzed';
   }
 };
@@ -233,7 +286,7 @@ function analyzeFace(landmarks, video) {
   const lm = landmarks;
   const eyeDist = Math.hypot(lm[33].x - lm[263].x, lm[33].y - lm[263].y);
   const faceW   = Math.hypot(lm[234].x - lm[454].x, lm[234].y - lm[454].y);
-  const eyeRatio = eyeDist / (faceW || 1); 
+  const eyeRatio = eyeDist / (faceW || 1);
   const faceH = Math.hypot(lm[10].x - lm[152].x, lm[10].y - lm[152].y);
   const aspectRatio = faceW / (faceH || 1);
   const noseLen = Math.hypot(lm[1].x - lm[2].x, lm[1].y - lm[2].y) * 10;
@@ -306,23 +359,23 @@ function updateSpiral() {
 
     const scrollTop = list.scrollTop;
     const listCenterY = list.clientHeight / 2;
-    const radius = list.clientWidth * 0.18; 
+    const radius = list.clientWidth * 0.18;
 
     const items = list.querySelectorAll('.ti:not(.hidden-item)');
-    
+
     items.forEach(el => {
       const itemCenterY = el.offsetTop + (el.offsetHeight / 2);
       const distFromCenter = (itemCenterY - scrollTop) - listCenterY;
       const angle = (distFromCenter / 150) * Math.PI;
 
-      const x = Math.sin(angle) * radius; 
-      const z = Math.cos(angle); 
-      const depthRatio = (z + 1) / 2; 
+      const x = Math.sin(angle) * radius;
+      const z = Math.cos(angle);
+      const depthRatio = (z + 1) / 2;
 
       el.style.transform = `translate3d(${x}px, 0px, 0px)`;
-      el.style.opacity = ''; 
+      el.style.opacity = '';
       el.style.zIndex = Math.round(depthRatio * 100);
-      el.style.pointerEvents = 'auto'; 
+      el.style.pointerEvents = 'auto';
     });
   });
 }
@@ -334,31 +387,32 @@ function applyFilter() {
   document.querySelectorAll('.ti').forEach(el => {
     el.classList.remove('hidden-item');
   });
-  
-  updateSpiral(); 
-  updateTextHighlights(); 
+
+  updateSpiral();
+  updateTextHighlights();
   requestDrawLine();
 }
 
 function buildList() {
   const list = document.getElementById('tList');
+  if(!list) return;
   list.innerHTML = '';
-  
+
   TRAITS.forEach(t => {
     const el = document.createElement('div');
     el.className = 'ti';
     el.id = 'li-' + t.id;
     el.dataset.cats = t.cats.join(',');
-    
+
     const baseHex = CAT_C[t.cats[0]] || '#cccccc';
     el.style.setProperty('--cat-color', baseHex);
     el.style.setProperty('--cat-bg-hover', hexToRgba(baseHex, 0.25));
-    
-    const catColors = t.cats.map(c => hexToRgba(CAT_C[c] || '#cccccc', 1)); 
+
+    const catColors = t.cats.map(c => hexToRgba(CAT_C[c] || '#cccccc', 1));
     let bgStyle = '';
-    
+
     if (catColors.length === 1) {
-      bgStyle = `background: ${catColors[0]};`; 
+      bgStyle = `background: ${catColors[0]};`;
     } else {
       const step = 100 / catColors.length;
       let parts = [];
@@ -368,40 +422,54 @@ function buildList() {
       });
       bgStyle = `background: linear-gradient(to right, ${parts.join(', ')});`;
     }
-    
+
     const displayName = currentLang === 'ko' ? t.name : (t.nameEn || t.name);
-    
+    const displayGene = SYSTEM_EN[t.gene] || t.gene;   // 모드와 무관하게 항상 영어로
+
     el.innerHTML = `
       <div class="ti-name">${displayName}</div>
-      <div class="ti-gene" style="${bgStyle} color: #000 !important; padding: 0.02rem 0.3rem; border-radius: 0; margin-left: 0.2rem;">${t.gene}</div>
+      <div class="ti-gene" style="${bgStyle} color: #000 !important; padding: 0.02rem 0.3rem; border-radius: 0; margin-left: 0.2rem;">${displayGene}</div>
     `;
-    
+
     el.onmouseenter = () => selectTraitById(t.id, 'list');
     list.appendChild(el);
   });
-  
+
   applyFilter();
   if (activeTrait) selectTraitById(activeTrait.id, 'list');
-  
+
   setTimeout(() => {
     updateSpiral();
     requestDrawLine();
   }, 100);
 }
 
+// 본문에서 '— 유전코드 .' 구간을 찾아 유전코드만 ABC 서체 span 으로 감싼다.
+// '—' 는 파싱 기준으로만 쓰고 화면에는 출력하지 않는다(대시 안 보임).
+function wrapGeneCode(text) {
+  const dash = text.indexOf('—');
+  if (dash === -1) return text;            // 대시 없으면 그대로
+  let end = text.indexOf('.', dash);       // 대시 뒤 첫 마침표 = 유전코드 끝
+  if (end === -1) end = text.length;
+  const head = text.slice(0, dash).replace(/\s+$/, '');  // 제목 (대시 제외)
+  const gene = text.slice(dash + 1, end).trim();         // 유전코드 구간
+  const tail = text.slice(end);                          // 마침표 이후 설명
+  return head + ' <span class="gene-code">' + gene + '</span>' + tail;
+}
+
 function buildCenterText() {
   const box = document.getElementById('center-text-box');
   if (!box) return;
   box.innerHTML = '';
-  
+
   CENTER_LINES.forEach(line => {
     const span = document.createElement('span');
     span.className = 'c-line';
     span.id = 'cline-' + line.id;
-    
+
     const displayText = currentLang === 'ko' ? line.text : (line.textEn || line.text);
-    span.textContent = displayText + ' ';
-    
+    span.innerHTML = wrapGeneCode(displayText) + ' ';
+
     const t = TRAITS.find(x => x.id === line.id);
     if (t) {
       const hex = CAT_C[t.cats[0]] || '#cccccc';
@@ -449,24 +517,24 @@ function drawMinimap() {
   if (!canvas) return;
   const ctx = canvas.getContext('2d');
   const cw = canvas.width, ch = canvas.height;
-  
+
   ctx.clearRect(0, 0, cw, ch);
-  
+
   TRAITS.forEach(t => {
     const isActive = activeTrait?.id === t.id;
     const isRelated = activeTrait && activeTrait.plei.includes(t.id);
     const fade = activeTrait && !isActive && !isRelated;
-    
+
     const x = t.bodyPos.x * cw;
     const y = t.bodyPos.y * ch;
-    
+
     ctx.beginPath();
     ctx.fillStyle = fade ? '#cccccc' : getColor(t);
     ctx.globalAlpha = fade ? 0.2 : (isActive || isRelated ? 1.0 : 0.8);
     const r = isActive ? 5 : (isRelated ? 4 : 2.5);
     ctx.arc(x, y, r, 0, Math.PI * 2);
     ctx.fill();
-    
+
     if (isActive || isRelated) {
       ctx.strokeStyle = getColor(t);
       ctx.lineWidth = 1.5;
@@ -482,7 +550,7 @@ function drawMinimap() {
 // CONNECT LINE
 // ══════════════════════════════════════════════
 function drawConnectLine() {
-  drawMinimap(); 
+  drawMinimap();
 
   const canvas = document.getElementById('connect-canvas');
   if (!canvas) return;
@@ -490,8 +558,8 @@ function drawConnectLine() {
   canvas.width = window.innerWidth;
   canvas.height = window.innerHeight;
   ctx.clearRect(0, 0, canvas.width, canvas.height);
-  
-  ctx.setLineDash([]); 
+
+  ctx.setLineDash([]);
 
   if (!activeTrait) return;
 
@@ -499,23 +567,23 @@ function drawConnectLine() {
   const isMobile = window.innerWidth <= 1024;
   const li   = document.getElementById('li-' + activeTrait.id);
   const span = document.getElementById('cline-' + activeTrait.id);
-  
+
   if (li && span) {
     const liR   = li.getBoundingClientRect();
     const spanR = span.getBoundingClientRect();
     const inView = (r) => r.bottom >= 0 && r.top <= window.innerHeight;
-    
+
     if (inView(liR) && inView(spanR)) {
       const sx = isMobile ? liR.left + 40 : liR.right;
       const sy = isMobile ? liR.bottom : liR.top + liR.height / 2;
       const ex = isMobile ? spanR.left + 20 : spanR.left;
       const ey = isMobile ? spanR.top : spanR.top + spanR.height / 2;
-      
+
       ctx.beginPath();
       ctx.moveTo(sx, sy);
       if (isMobile) ctx.bezierCurveTo(sx, sy + 40, ex, ey - 40, ex, ey);
       else ctx.bezierCurveTo(sx + 40, sy, ex - 40, ey, ex, ey);
-      
+
       ctx.strokeStyle = color;
       ctx.lineWidth = 1.5;
       ctx.globalAlpha = 0.7;
@@ -573,11 +641,11 @@ function selectTraitById(id, source = 'list') {
   const li = document.getElementById('li-' + t.id);
   if (li) {
     li.classList.add('active');
-    
+
     if (source === 'text') {
       const list = document.getElementById('tList');
       const targetScroll = li.offsetTop - (list.clientHeight / 2) + (li.offsetHeight / 2);
-      list.scrollTo({ top: targetScroll, behavior: 'smooth' });
+      if(list) list.scrollTo({ top: targetScroll, behavior: 'smooth' });
     }
   }
 
@@ -586,7 +654,7 @@ function selectTraitById(id, source = 'list') {
     if (pleiLi) pleiLi.classList.add('plei-related');
   });
 
-  updateTextHighlights(); 
+  updateTextHighlights();
   const target = document.getElementById('cline-' + id);
   if (target && source === 'list') target.scrollIntoView({behavior:'smooth', block:'center'});
   requestDrawLine();
@@ -597,7 +665,7 @@ function closeDet() {
   document.querySelectorAll('.ti').forEach(el => {
     el.classList.remove('active', 'plei-related');
   });
-  updateTextHighlights(); 
+  updateTextHighlights();
   requestDrawLine();
 }
 
@@ -694,10 +762,10 @@ function drawAll(canvas, pCanvas, res) {
     });
   }
 
-  if (!faceDetected && attachProgress < 0.02) { 
-    drawDotsOnly(ctx); 
+  if (!faceDetected && attachProgress < 0.02) {
+    drawDotsOnly(ctx);
     drawMinimap();
-    return; 
+    return;
   }
 
   const drawnPairs = new Set();
@@ -718,12 +786,12 @@ function drawAll(canvas, pCanvas, res) {
 
       pctx.beginPath();
       pctx.strokeStyle = getColor(t);
-      pctx.setLineDash([]); 
+      pctx.setLineDash([]);
       if (isActive || isRelated) {
-        pctx.lineWidth = 4.5;  
+        pctx.lineWidth = 4.5;
         pctx.globalAlpha = 0.9;
       } else if (!activeTrait) {
-        pctx.lineWidth = 2.5;  
+        pctx.lineWidth = 2.5;
         pctx.globalAlpha = 0.45;
       }
       pctx.moveTo(ax,ay); pctx.lineTo(bx,by); pctx.stroke();
@@ -737,16 +805,16 @@ function drawAll(canvas, pCanvas, res) {
     if (activeTrait && !isActive && !isRelated) return;
 
     const color = getColor(t), score = getTraitScore(t);
-    const baseR = 1.8 + score * 0.8; 
+    const baseR = 1.8 + score * 0.8;
     const r = isActive ? baseR*1.4 : (isRelated ? baseR*1.2 : baseR);
-    
+
     const [x1,y1] = getLmPos(t.id+'_p', t.lm, res, cw, ch);
     let drawX=x1, drawY=y1;
 
     if (t.lm2) {
       const [x2,y2] = getLmPos(t.id+'_s', t.lm2, res, cw, ch);
       ctx.beginPath(); ctx.strokeStyle=color;
-      ctx.lineWidth=isActive?3:2; 
+      ctx.lineWidth=isActive?3:2;
       ctx.globalAlpha=(isActive?0.5:0.12);
       ctx.moveTo(x1,y1); ctx.lineTo(x2,y2); ctx.stroke();
       ctx.globalAlpha=(isActive?0.2:0.06);
@@ -762,13 +830,14 @@ function drawAll(canvas, pCanvas, res) {
     ctx.beginPath(); ctx.arc(drawX, drawY, r, 0, Math.PI*2); ctx.fill();
 
     if (isActive||isRelated||t.assoc>=4) {
+      const label = SYSTEM_EN[t.gene] || t.gene;   // 한글 시스템 이름 → 영어, 유전자 코드는 그대로
       ctx.globalAlpha = isActive ? 1.0 : 0.85;
-      ctx.font = `800 ${isActive ? 14 : 11}px "JetBrains Mono", "Spoqa Han Sans Neo", sans-serif`;
+      ctx.font = `800 ${isActive ? 14 : 11}px "ABC Camera", "JetBrains Mono", sans-serif`;
       ctx.textBaseline = 'middle';
-      const tx = drawX + r + 5; 
+      const tx = drawX + r + 5;
       ctx.lineJoin = 'round'; ctx.lineWidth = 0.3; ctx.strokeStyle = 'rgba(0,0,0,1)';
-      ctx.strokeText(t.gene, tx, drawY);
-      ctx.fillStyle = color; ctx.fillText(t.gene, tx, drawY);
+      ctx.strokeText(label, tx, drawY);
+      ctx.fillStyle = color; ctx.fillText(label, tx, drawY);
     }
     ctx.globalAlpha = 1;
   });
@@ -793,7 +862,7 @@ function resizeCanvases() {
     mmC.width = mmC.clientWidth;
     mmC.height = mmC.clientHeight;
   }
-  
+
   requestDrawLine();
 }
 
@@ -814,6 +883,32 @@ function saveSnapshot() {
 }
 
 async function initSystem() {
+  // 캔버스가 ABC Camera 를 쓸 수 있도록 폰트 미리 로드 (Medium + Heavy)
+  if (document.fonts && document.fonts.load) {
+    document.fonts.load('500 14px "ABC Camera"');
+    document.fonts.load('800 14px "ABC Camera"');
+  }
+
+  // 커스텀 커서: 기본 노랑 원 → 유전자에 닿으면 그 유전자 색만 빼고 다른 색 랜덤
+  if (!document.getElementById('cursor-dot')) {
+    const dot = document.createElement('div');
+    dot.id = 'cursor-dot';
+    document.body.appendChild(dot);
+    document.addEventListener('mousemove', (e) => {
+      dot.style.transform = `translate(${e.clientX}px, ${e.clientY}px) translate(-50%, -50%)`;
+    });
+    let lastHovered = null;
+    document.addEventListener('mouseover', (e) => {
+      const el = e.target.closest ? e.target.closest('.ti, .c-line') : null;
+      if (el === lastHovered) return;                 // 같은 유전자 안에선 색 안 바꿈
+      lastHovered = el;
+      if (!el) { dot.style.backgroundColor = 'yellow'; return; }   // 유전자 밖 = 노랑
+      const own = el.style.getPropertyValue('--cat-color').trim().toLowerCase();
+      const others = Object.values(CAT_C).filter(c => String(c).toLowerCase() !== own);
+      dot.style.backgroundColor = others[Math.floor(Math.random() * others.length)] || 'yellow';
+    });
+  }
+
   if (!document.getElementById('minimap-wrap')) {
     const mmWrap = document.createElement('div');
     mmWrap.id = 'minimap-wrap';
@@ -825,10 +920,9 @@ async function initSystem() {
 
     mmWrap.addEventListener('click', () => {
       mmWrap.classList.toggle('expanded');
-      setTimeout(resizeCanvases, 450); 
+      setTimeout(resizeCanvases, 450);
     });
 
-    // 🎯 [에디터 모드] 마우스로 점 멱살 잡고 끌어다 놓기 (Drag & Drop)
     const mmCanvas = document.getElementById('minimap-canvas');
     let dragTrait = null;
 
@@ -837,8 +931,8 @@ async function initSystem() {
         const rect = mmCanvas.getBoundingClientRect();
         const clickX = (e.clientX - rect.left) / rect.width;
         const clickY = (e.clientY - rect.top) / rect.height;
-        
-        let minDist = 0.05; // 마우스 인식 범위
+
+        let minDist = 0.05;
         TRAITS.forEach(t => {
           const dist = Math.hypot(t.bodyPos.x - clickX, t.bodyPos.y - clickY);
           if (dist < minDist) { minDist = dist; dragTrait = t; }
@@ -846,13 +940,11 @@ async function initSystem() {
       });
 
       mmCanvas.addEventListener('mousemove', (e) => {
-        if (!dragTrait) return; 
+        if (!dragTrait) return;
         const rect = mmCanvas.getBoundingClientRect();
-        
         dragTrait.bodyPos.x = (e.clientX - rect.left) / rect.width;
         dragTrait.bodyPos.y = (e.clientY - rect.top) / rect.height;
-        
-        requestDrawLine(); 
+        requestDrawLine();
       });
 
       mmCanvas.addEventListener('mouseup', () => { dragTrait = null; });
@@ -864,13 +956,11 @@ async function initSystem() {
           output += `  {id:'${t.id}', cats:['${t.cats.join("','")}'], name:'${t.name}', nameEn:'${t.nameEn}', gene:'${t.gene}', lm:'${t.lm}', lm2:${t.lm2 ? "'"+t.lm2+"'" : null}, assoc:${t.assoc}, vis:'${t.vis}', bodyPos:{x:${t.bodyPos.x.toFixed(3)}, y:${t.bodyPos.y.toFixed(3)}}, plei:[${t.plei.map(p=>"'"+p+"'").join(',')}]},\n`;
         });
         output += "];";
-        
-        console.log("👇 아래 코드를 복사해서 script.js의 TRAITS 배열에 통째로 덮어쓰세요! 👇");
         console.log(output);
-        alert("F12(개발자 도구) 콘솔창을 열면 업데이트된 코드가 있습니다!\n복사해서 원본에 덮어쓰기 하세요.");
+        alert("F12 콘솔창 확인 후 코드를 복사하세요.");
       });
     }
-  } // 👈 이 괄호가 여기 있어야 정상적으로 미니맵 생성 영역이 닫힘!
+  }
 
   if (!document.getElementById('ppl-png')) {
     const pplImg = document.createElement('img');
@@ -884,7 +974,7 @@ async function initSystem() {
     buildCenterText();
     listBuilt = true;
   }
-  
+
   resizeCanvases();
   window.addEventListener('resize', resizeCanvases);
 
@@ -910,7 +1000,7 @@ async function initSystem() {
   holistic.setOptions({modelComplexity:1, smoothLandmarks:true, minDetectionConfidence:0.5, minTrackingConfidence:0.5});
   holistic.onResults(res => {
     lastResults = res;
-    status.textContent = res.faceLandmarks ? 'FACE DETECTED' : 'SCANNING...';
+    if(status) status.textContent = res.faceLandmarks ? 'FACE DETECTED' : 'SCANNING...';
     drawAll(canvas, pCanvas, res);
   });
 
@@ -918,7 +1008,7 @@ async function initSystem() {
     onFrame: async () => { await holistic.send({image:video}); },
     width: 1280, height: 720
   });
-  cam.start().catch(() => { status.textContent = 'CAM ERROR'; });
+  cam.start().catch(() => { if(status) status.textContent = 'CAM ERROR'; });
 
   const tListContainer = document.querySelector('.trait-list-container');
   if (tListContainer) tListContainer.addEventListener('mouseleave', closeDet);
@@ -928,18 +1018,79 @@ async function initSystem() {
   if (camWidget) {
     camWidget.addEventListener('click', () => {
       camWidget.classList.toggle('expanded');
-      
       const mmWrap = document.getElementById('minimap-wrap');
       if (mmWrap) {
-        if (camWidget.classList.contains('expanded')) {
-          mmWrap.classList.add('visible');
-        } else {
-          mmWrap.classList.remove('visible');
-        }
+        if (camWidget.classList.contains('expanded')) mmWrap.classList.add('visible');
+        else mmWrap.classList.remove('visible');
       }
       setTimeout(resizeCanvases, 450);
     });
   }
-} // 👈 여기가 진짜 initSystem() 함수의 끝!
-
+}
 window.addEventListener('DOMContentLoaded', initSystem);
+
+// ══════════════════════════════════════════════
+// PRINT — 3모드 (리스트 / 미니맵 / people 실루엣)
+// ══════════════════════════════════════════════
+window.prepareAndPrint = function() { window.print(); };
+
+window.addEventListener('beforeprint', () => {
+  const body = document.body;
+  const mm   = document.getElementById('minimap-wrap');
+  const cam  = document.getElementById('camWidget');
+  const list = document.getElementById('tList');
+  body.classList.remove('print-list', 'print-minimap', 'print-people');
+
+  let pg = document.getElementById('dyn-page');
+  if (!pg) { pg = document.createElement('style'); pg.id = 'dyn-page'; document.head.appendChild(pg); }
+
+  // 미니맵 펼침 → 색 점만
+  if (mm && mm.classList.contains('expanded')) {
+    body.classList.add('print-minimap');
+    drawMinimap();
+    const c = document.getElementById('minimap-canvas');
+    pg.textContent = `@page{ size:${c.clientWidth}px ${c.clientHeight}px; margin:0 }`;
+    return;
+  }
+
+  // 웹캠 펼침 → 점 처리된 people.svg 실루엣만
+  if (cam && cam.classList.contains('expanded')) {
+    body.classList.add('print-people');
+    const bg = mm && mm.querySelector('.minimap-bg');
+    const w = bg ? bg.clientWidth  : 256;
+    const h = bg ? bg.clientHeight : 448;
+    pg.textContent = `@page{ size:${w}px ${h}px; margin:0 }`;
+    return;
+  }
+
+  // 기본 → 유전형질 리스트 전체 (나선형, 한 페이지)
+  body.classList.add('print-list');
+  if (!list) return;
+  const items = [...list.querySelectorAll('.ti')];
+  if (!items.length) return;
+  const radius = list.clientWidth * 0.18;
+  let maxW = 0;
+  items.forEach(el => {
+    const y = el.offsetTop + el.offsetHeight / 2;
+    el.style.transform = `translate3d(${Math.sin(y / 150 * Math.PI) * radius}px, 0, 0)`;
+    el.style.opacity = '1';
+    el.style.zIndex = 'auto';
+    maxW = Math.max(maxW, el.offsetWidth);
+  });
+  const first = items[0], last = items[items.length - 1];
+  const contentH = (last.offsetTop + last.offsetHeight) - first.offsetTop;
+  const padV = 80, padH = 80;
+  const pageW = Math.ceil(maxW + radius * 2 + padH * 2);
+  const pageH = Math.ceil(contentH + padV * 2);
+  list.style.paddingTop = padV + 'px';
+  list.style.paddingBottom = padV + 'px';
+  pg.textContent = `@page{ size:${pageW}px ${pageH}px; margin:0 }`;
+});
+
+window.addEventListener('afterprint', () => {
+  document.body.classList.remove('print-list', 'print-minimap', 'print-people');
+  const list = document.getElementById('tList');
+  if (list) { list.style.paddingTop = ''; list.style.paddingBottom = ''; }
+  const pg = document.getElementById('dyn-page'); if (pg) pg.textContent = '';
+  updateSpiral();
+});

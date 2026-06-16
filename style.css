@@ -1,15 +1,53 @@
 /* ==============================================================
    VARIABLES & GLOBAL
 ============================================================== */
+@font-face {
+  font-family: 'ABC Camera';
+  src: url('ABCCamera-Medium-Trial.otf') format('opentype');
+  font-weight: 500;          
+  font-style: normal;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: 'ABC Camera';
+  src: url('ABCCamera-Heavy-Trial.otf') format('opentype');
+  font-weight: 800;           
+  font-style: normal;
+  font-display: swap;
+}
+
+
 :root {
+--bar-h: 2.25rem;
+  --top-gap: 0; 
   --bg: #ffffff;
   --text-main: #000000;
   --text-dim: #999999;
   --line: #e0e0e0;
   --accent: #00FF66;
+   --top-gap: 1rem;
 }
 
+
+#top-bar {
+  position: fixed;
+  top: 0; left: 0;
+  width: 100%;
+  height: var(--bar-h);
+  display: flex;
+  align-items: center;
+  padding: 0 0.75rem;
+  background: #fff;
+  z-index: 2000;
+}
+#bar-logo {
+  height: 100%;        
+  width: auto;
+  display: block;
+}
 * { 
+  cursor: none !important;
   box-sizing: border-box; 
   margin: 0; 
   padding: 0; 
@@ -33,8 +71,11 @@ body {
 }
 
 .screen {
-  position: fixed; 
-  inset: 0;
+  position: fixed;
+  top: var(--bar-h);   /* 상단바 아래에서 시작 (이제 안 덮임) */
+  right: 0;
+  bottom: 0;
+  left: 0;
   display: flex;
   background: var(--bg);
   z-index: 10;
@@ -51,8 +92,9 @@ body {
 
 /* ── LEFT PANEL (리스트 영역) ── */
 .left-panel {
-  width: 26vw; /* 👈 기존 18vw에서 25vw로 패널 넓이 확장! */
-  border-right: none; /* 👈 왼쪽과 가운데 패널 사이의 세로 선 삭제! */
+  height: 100%;
+  width: 26vw;
+  border-right: none;
   display: flex; 
   flex-direction: column;
   height: 100vh;
@@ -66,19 +108,22 @@ body {
 }
 
 .trait-list-container { 
-  flex: 1; 
-  display: flex; 
-  flex-direction: column; 
-  overflow: hidden; 
+  padding-top: var(--top-gap) !important;
+flex: 1;
+  display: flex;
+  flex-direction: column;
+  overflow: hidden;
+  padding-top: var(--top-gap);
 }
 
 /* 👇 리스트 스크롤 영역 */
 .trait-list { 
+  padding-top: 0 !important; 
   flex: 1; 
   overflow-y: auto; 
   overflow-x: hidden;
   position: relative;
-  padding: 30vh 0; /* 👈 여백을 줄여서 위아래 텍스트가 더 많이, 끊기지 않고 보이게 함 */
+   padding: 0 0 30vh 0; 
   -ms-overflow-style: none;
   scrollbar-width: none;
 }
@@ -89,10 +134,6 @@ body {
 /* ==============================================================
    SPIRAL LIST ITEMS (.ti)
 ============================================================== */
-/* ==============================================================
-   SPIRAL LIST ITEMS (.ti)
-============================================================== */
-/* 👇 개별 유전형질 아이템 (전체 배경색 삭제) */
 .ti {
   position: relative; 
   margin: 0.3rem auto; 
@@ -101,12 +142,12 @@ body {
   justify-content: center;
   align-items: center;
   gap: 0.05rem;
-  padding: 0.1rem; /* 전체 패딩 축소 */
+  padding: 0.1rem;
   
   transform-origin: center center;
   will-change: transform, opacity;
   
-  background-color: transparent; /* 전체 박스 배경색 삭제 */
+  background-color: transparent;
   
   cursor: pointer;
   transition: opacity 0.2s ease, transform 0.2s ease;
@@ -117,7 +158,7 @@ body {
   display: inline-block;
   width: 0.5rem; height: 0.5rem;
   border-radius: 50%;
-  background-color: var(--cat-color); /* 👈 여기를 #000에서 다시 var(--cat-color)로 변경! */
+  background-color: var(--cat-color);
   flex-shrink: 0; 
   margin-right: 0.2rem;
   transition: transform 0.2s ease;
@@ -133,29 +174,33 @@ body {
 
 
 .ti-gene {
-  font-family: 'JetBrains Mono', monospace;
+  font-family: 'ABC Camera', sans-serif;
   font-size: 0.85rem; 
   font-weight: 400; 
-  color: #000 !important; /* 글씨는 무조건 검정색 */
+  color: #000 !important;
   margin-left: 0.3rem; 
-  padding: 0.1rem 0.5rem; /* 하이라이트 박스 크기를 위한 패딩 */
-  border-radius: 2px; /* 박스를 살짝만 둥글게 */
-  /* background는 JS에서 동적으로 주입됨! */
+  padding: 0.1rem 0.5rem;
+  border-radius: 2px;
+}
+
+.gene-code {
+  font-family: 'ABC Camera', 'Spoqa Han Sans Neo', sans-serif;
+  font-weight: 800;   /* 위 Heavy 등록과 같은 값 → Heavy 파일 사용 */
 }
 
 /* 상태별 디자인 변화 */
 .ti:hover { 
-  opacity: 0.5; /* 마우스 올리면 전체가 살짝 투명해짐 */
+  opacity: 0.5;
 }
 .ti.active { 
   opacity: 1;
   z-index: 1000 !important; 
 }
 .ti.active .ti-name { 
-  font-weight: 900; /* 활성화 시 글씨 살짝 더 두껍게 */
+  font-weight: 900;
 }
 .ti.active::before { 
-  transform: scale(1.5); /* 활성화 시 검정 점 커짐 */
+  transform: scale(1.5);
 }
 .ti.hidden-item { display: none !important; }
 .ti.plei-related { opacity: 1 !important; }
@@ -171,6 +216,7 @@ body {
 }
 
 .body-map-wrap {
+  padding-top: var(--top-gap) !important;
   width: 100%;
   height: 100vh;
   z-index: 5;
@@ -179,16 +225,19 @@ body {
 }
 
 #center-text-box {
-  width: 100%; height: 100%;
+  padding-top: 0 !important;
+  width: 44.3vw;
+  height: 100%;
   overflow-y: auto;
-  font-family: 'Spoqa Han Sans Neo', sans-serif;
-  font-size: 1.25rem; 
+  font-family: 'Spoqa Han Sans Neo', sans-serif;   /* 설명은 한/영 모두 스포카 */
+  font-size: 1.25rem;
   font-weight: 700;
-  line-height: 1.6; 
+  line-height: 1.6;
   word-break: keep-all;
-  padding-bottom: 50vh;
-  width: 45vw; 
+ padding-top: 0;       
+  padding-bottom: 30vh;
 }
+
 
 .c-line {
   display: inline;
@@ -233,6 +282,7 @@ body {
    WEBCAM WIDGET
 ============================================================== */
 .cam-widget {
+  top: var(--top-gap) !important; 
   position: absolute;
   top: 2rem; 
   right: 1.25rem; 
@@ -275,37 +325,35 @@ body {
 .cam-overlay-text { text-align: center; }
 .cam-overlay-eye {
   display: block; 
-  font-family: 'JetBrains Mono', monospace; 
+  font-family: 'ABC Camera', sans-serif;
   font-weight: 400;
   font-size: 0.8rem; 
-  letter-spacing: 0.6em; /* 👈 자간 조절 (숫자를 키울수록 글자가 넓게 퍼짐) */
+  letter-spacing: 0.6em;
   color: var(--accent); 
-  margin-bottom: 1.5rem; /* 👈 아래쪽 하얀 안내 문구와의 간격! */
+  margin-bottom: 1.5rem;
   animation: blink 1.4s ease-in-out infinite;
 }
 .cam-overlay-sub {
   display: block; 
-  font-family: 'JetBrains Mono', monospace; 
+    font-family: 'ABC Camera', sans-serif;
   font-weight: 200;
   font-size: 0.65rem; 
-  letter-spacing: 0.09em; /* 👈 자간 조절 */
+  letter-spacing: 0.09em;
   color: rgb(255, 255, 255); 
-  line-height: 1.35; /* 👈 행간 조절! (줄과 줄 사이 간격. 1.5, 2, 3 등으로 조절해봐) */
+  line-height: 1.35;
 }
 @keyframes blink { 0%, 100% { opacity: 1; } 50% { opacity: 0.2; } }
 
 #face-status {
   position: absolute; 
   top: 1rem; left: 1.25rem; 
-  font-family: 'JetBrains Mono', monospace; 
-  font-weight: 400; 
+ font-family: 'ABC Camera', sans-serif;
+  font-weight: 800;   
   font-size: 0.6rem; 
-  letter-spacing: 0.05em; /* 👈 자간 조절 (글자 사이 간격) */
-  
-  /* 👇 기존의 답답한 하얀 박스를 없애고, 테두리만 있는 투명한 스타일로 변경해봤어! */
-  background: none; /* 반투명한 검은색 배경 */
+  letter-spacing: 0.05em;
+  background: none;
   color: var(--accent); 
-  padding: 0.2rem 0.2rem; 
+  padding: 0.05rem 0.05rem; 
   z-index: 20;
 }
 
@@ -355,31 +403,31 @@ body {
 /* ==============================================================
    MINIMAP
 ============================================================== */
+
 #minimap-wrap {
   position: fixed;
   bottom: 3.5rem;
-  right: 1.25rem;
+  right: 2.25rem;       
   width: 18rem;
   height: 30rem;
   background-color: #000000;
-  border: 1px solid #333333;
+  border: none;          
   z-index: 101;
   opacity: 0;
   pointer-events: none;
   transition: all 0.4s cubic-bezier(0.16,1,0.3,1);
-  cursor: pointer; 
+  cursor: pointer;
   transform: translate(0, 0);
 }
 
 #minimap-wrap.visible { opacity: 1; pointer-events: auto; }
 #minimap-wrap.expanded {
   bottom: 50vh; right: 50vw;
-  transform: translate(70%, 50%); 
-  height: 85vh; width: calc(85vh * (9 / 19)); 
-  z-index: 9999; border: 1px solid #555555;
-  box-shadow: 0 0 40px rgba(0,0,0,0.8); 
+  transform: translate(70%, 50%);
+  height: 85vh; width: calc(85vh * (9 / 19));
+  z-index: 9999;
+  border: none;         
 }
-
 .minimap-bg {
   position: absolute;
   top: 1rem; left: 1rem; right: 1rem; bottom: 1rem;
@@ -401,10 +449,10 @@ body {
 
 #ppl-png {
   position: fixed;
-  bottom: 4rem;      
-  right: 4rem;      
-  width: 13rem;      
-  transform: rotate(-18deg); 
+  bottom: 5rem;      
+  right: 3rem;      
+  width: 20rem;      
+  transform: rotate(-10deg); 
   height: auto;     
   z-index: 90;       
   pointer-events: none; 
@@ -437,15 +485,74 @@ body {
   .bottom-right-actions { bottom: 1rem; right: 1rem; }
 }
 
+
+
 /* ==============================================================
-   ENGLISH MODE (영어일 때만 적용되는 스타일)
+   ENGLISH MODE
 ============================================================== */
-/* 중앙 텍스트 영어 행간 좁히기 (기존 1.8 -> 1.35) */
 body.en-mode #center-text-box {
   line-height: 1.35; 
 }
-
-/* (선택) 왼쪽 리스트 아이템들의 행간도 영어일 때 더 좁히고 싶다면 적용 */
 body.en-mode .ti {
   margin: 0.4rem auto; 
+}
+@media print {
+  *, *::before, *::after {
+    -webkit-print-color-adjust: exact !important;
+    print-color-adjust: exact !important;
+  }
+  @page { margin: 0; }
+
+  html, body { height: auto !important; overflow: visible !important; background: #fff !important; }
+
+.cam-widget, #ppl-png, .bottom-right-actions, #face-status, #connect-canvas, #top-bar { display: none !important; }
+
+  /* ── 기본: 유전형질 리스트 전체 (나선형, 한 페이지) ── */
+  body.print-list #minimap-wrap,
+  body.print-list .right-panel { display: none !important; }
+  body.print-list .screen { position: static !important; inset: auto !important; height: auto !important; display: block !important; }
+  body.print-list #s-main { display: block !important; width: 100% !important; }
+  body.print-list .left-panel { width: 100% !important; height: auto !important; }
+  body.print-list .trait-list-container { overflow: visible !important; height: auto !important; }
+  body.print-list .trait-list { overflow: visible !important; height: auto !important; }
+  body.print-list .ti { opacity: 1 !important; }
+
+  /* ── 미니맵 펼침: 색 점만 ── */
+  body.print-minimap .screen,
+  body.print-minimap .minimap-bg { display: none !important; }
+  body.print-minimap #minimap-wrap {
+    position: fixed !important; top: 0 !important; left: 0 !important;
+    right: auto !important; bottom: auto !important; transform: none !important;
+    width: 100% !important; height: 100% !important;
+    background: #fff !important; border: none !important; box-shadow: none !important; opacity: 1 !important;
+  }
+  body.print-minimap #minimap-canvas {
+    top: 0 !important; left: 0 !important; width: 100% !important; height: 100% !important;
+  }
+
+  /* ── 웹캠 펼침: 점 처리된 people.svg 실루엣만 (배경 없이) ── */
+  body.print-people .screen,
+  body.print-people #minimap-canvas { display: none !important; }
+  body.print-people #minimap-wrap {
+    position: fixed !important; top: 0 !important; left: 0 !important;
+    right: auto !important; bottom: auto !important; transform: none !important;
+    width: 100% !important; height: 100% !important;
+    background: transparent !important; border: none !important; box-shadow: none !important; opacity: 1 !important;
+  }
+  body.print-people .minimap-bg {
+    top: 0 !important; left: 0 !important; right: 0 !important; bottom: 0 !important; opacity: 1 !important;
+  }
+}
+
+#cursor-dot {
+  position: fixed;
+  top: 0; left: 0;
+  width: 18px; height: 18px;
+  border-radius: 50%;
+  background: #ffff00;              /* 기본 검정 */
+  pointer-events: none;          /* 커서가 클릭/호버 막지 않게 */
+  z-index: 99999;                /* 항상 맨 위 */
+  transform: translate(-50%, -50%);
+  transition: background-color 0.12s ease;
+  will-change: transform;
 }
